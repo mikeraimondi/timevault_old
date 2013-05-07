@@ -9,6 +9,9 @@
     <li id="logout">
     <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>
     </li>
+    <li id="all_tasks">
+    <%= link_to "All Tasks", tasks_path %>
+    </li>
   <% else %>
     <li id="login">
     <%= link_to('Login', new_user_session_path)  %>
