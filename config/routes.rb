@@ -1,6 +1,7 @@
 Timevault::Application.routes.draw do
-  resources :tasks
-  devise_for :users
+  devise_for :users do
+    resources :tasks
+  end
 
   root :to => "main_pages#home"
 

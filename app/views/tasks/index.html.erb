@@ -1,5 +1,7 @@
 <div class="nav_active" id="all_tasks">
-  <% @tasks.each do |task| %>
-    <%= task.name %>
-  <% end %>
+  <ul>
+    <% @tasks.each do |task| %>
+    <li><%= link_to(task.name, task) %></li>
+    <% end %>
+  </ul>
 </div>
