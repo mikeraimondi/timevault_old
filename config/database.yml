@@ -47,5 +47,10 @@ test:
   database: timevault_test
 
 production:
-  <<: *common
-  database: timevault_production
+  adapter: postgresql
+  encoding: unicode
+  host: ec2-54-235-155-182.compute-1.amazonaws.com:5432
+  pool: 5
+  username: mpznylxbrleqah
+  password: TVOGbKt1Ovjp8s7r38DvBr-vVx
+  database: dasl38tmcs6avf
