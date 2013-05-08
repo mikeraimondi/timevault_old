@@ -6,25 +6,16 @@
 <%= link_to "TimeVault", root_path, :class => 'brand' %>
 <ul class="nav">
   <% if user_signed_in? %>
-    <li id="logout">
-    <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>
+    <li id="add_task">
+    <%= link_to "Add Task", new_task_path %>
     </li>
     <li id="all_tasks">
     <%= link_to "All Tasks", tasks_path %>
-    </li>
-    <li id="add_task">
-    <%= link_to "Add Task", new_task_path %>
     </li>
   <% else %>
     <li id="login">
     <%= link_to('Login', new_user_session_path)  %>
     </li>
-  <% end %>
-  <% if user_signed_in? %>
-    <li id="edit_account">
-    <%= link_to('Edit account', edit_user_registration_path) %>
-    </li>
-  <% else %>
     <li id="sign_up">
     <%= link_to('Sign up', new_user_registration_path)  %>
     </li>
@@ -35,5 +26,13 @@
     <li id="about">
     <%= link_to('About', about_path) %>
     </li>
+  <% if user_signed_in? %>
+    <li id="edit_account">
+    <%= link_to('Edit account', edit_user_registration_path) %>
+    </li>
+    <li id="logout">
+    <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>
+    </li>
+  <% end %>
   </ul>
 </div>
