@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_filter :authenticate_user!
+  helper_method :get_current_time
 
   # GET /tasks
   # GET /tasks.json
@@ -48,5 +49,9 @@ class TasksController < ApplicationController
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def get_current_time
+    DateTime.now.strftime('%m/%d/%Y %I:%M:%S %p')
   end
 end
