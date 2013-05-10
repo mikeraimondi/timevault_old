@@ -73,6 +73,16 @@ class TasksController < ApplicationController
     end
   end
 
+  def destroy
+    @task = current_user.tasks.find(params[:id])
+    @task.destroy
+
+    respond_to do |format|
+      format.html { redirect_to tasks_path }
+      format.json { head :no_content }
+    end
+  end
+
   def get_current_time
     DateTime.now.strftime('%m/%d/%Y %I:%M:%S %p')
   end
