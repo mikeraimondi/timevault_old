@@ -35,6 +35,28 @@ class TasksController < ApplicationController
     end
   end
 
+  # GET /tasks/new
+  # GET /tasks/new.json
+  def edit
+    @task = current_user.tasks.find(params[:id])
+  end
+
+  # PUT /tasks/1
+  # PUT /tasks/1.json
+  def update
+    @task = current_user.tasks.find(params[:id])
+
+    respond_to do |format|
+      if @task.update_attributes(params[:task])
+        format.html { redirect_to @task, notice: 'Task was successfully updated.'}
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # POST /tasks
   # POST /tasks.json
   def create
