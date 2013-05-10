@@ -13,5 +13,5 @@ $ ->
     console.log(end_date)
     start_picker = $('#task_start').data('datetimepicker')
     end_picker = $('#task_end').data('datetimepicker')
-    start_picker.setLocalDate(start_date)
-    end_picker.setLocalDate(end_date)
+    start_picker.setDate(start_date)
+    end_picker.setDate(end_date)
