@@ -7,3 +7,10 @@ $ ->
     language: 'en',
     pick12HourFormat: true,
     pickDate:false
+  if $('div#edit-task').length
+    start_date = new Date( Date(task.start) )
+    end_date = new Date( Date(task.start) )
+    start_picker = $('#task_start').data('datetimepicker')
+    end_picker = $('#task_end').data('datetimepicker')
+    start_picker.setLocalDate(start_date)
+    end_picker.setLocalDate(end_date)
