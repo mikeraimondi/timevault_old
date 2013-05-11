@@ -9,9 +9,13 @@ $ ->
     pickDate:false
   if $('div#edit-task').length
     start_date = new Date(task.start)
-    end_date = new Date(task.end)
-    console.log(end_date)
     start_picker = $('#task_start').data('datetimepicker')
-    end_picker = $('#task_end').data('datetimepicker')
     start_picker.setDate(start_date)
-    end_picker.setDate(end_date)
+    if task.end
+      end_date = new Date(task.end)
+      end_picker = $('#task_end').data('datetimepicker')
+      end_picker.setDate(end_date)
+    else
+      end_date = new Date()
+      end_picker = $('#task_end').data('datetimepicker')
+      end_picker.setLocalDate(end_date)
