@@ -5,7 +5,7 @@
   <%= simple_form_for( @task, :html => {class: 'form-horizontal' } ) do |f| %>
 
     <%= f.input :name %>
-    <%= f.input :description %>
+    <%= f.input :description, input_html: { cols: 60, rows: 3 } %>
   <div id="task_start" class="picker input-append well">
         <%= f.label :start %>
         <%= f.input_field :start, as: :string, :'data-format' => "dd/MM/yyyy HH:mm:ss PP" %>
