@@ -7,6 +7,12 @@ class TasksController < ApplicationController
   def index
     @offset = params[:p].to_i
     @offset = 0 if @offset < 0
+    @next_offset = @offset + 10
+    if @offset == 0
+      @prev_offset = 0
+    else
+      @prev_offset = @offset - 10
+    end
     @tasks = current_user.tasks.limit(10).offset(@offset).order("start DESC")
     @task_count = current_user.tasks.count
 
