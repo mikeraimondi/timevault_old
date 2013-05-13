@@ -14,7 +14,7 @@ class TasksController < ApplicationController
       @prev_offset = @offset - 10
     end
     @tasks = current_user.tasks.limit(10).offset(@offset).order("start DESC")
-    @task_count = current_user.tasks.count
+    @page_count = (current_user.tasks.count/10.to_f).ceil
 
     respond_to do |format|
       format.html # index.html.erb
