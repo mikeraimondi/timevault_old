@@ -6,6 +6,7 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     @offset = params[:p].to_i
+    @offset = 0 if @offset < 0
     @tasks = current_user.tasks.limit(10).offset(@offset).order("start DESC")
     @task_count = current_user.tasks.count
 
