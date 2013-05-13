@@ -1,7 +1,7 @@
 <div class="nav_active" id="add_task">
   <%= simple_form_for(@task, :html => {:class => 'form-horizontal' }) do |form| %>
     <%= form.input :name %>
-    <%= form.input :description, input_html: { cols: 60, rows: 2 } %>
+    <%= form.input :description, input_html: { cols: 60, rows: 3 } %>
 
     <div id="task_start" class="picker input-append well">
       <%= form.label :start %>
