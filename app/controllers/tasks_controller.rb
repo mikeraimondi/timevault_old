@@ -5,7 +5,9 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = current_user.tasks.order("start DESC")
+    @offset = params[:p].to_i
+    @tasks = current_user.tasks.limit(10).offset(@offset).order("start DESC")
+    @task_count = current_user.tasks.count
 
     respond_to do |format|
       format.html # index.html.erb

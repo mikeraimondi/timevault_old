@@ -1,4 +1,13 @@
 <div class="nav_active" id="all_tasks">
+  <div class="pagination">
+    <ul>
+      <li><%= link_to('Prev', params.merge( {:p => (@offset-10)} )) %></li>
+      <% (@task_count/10.to_f).ceil.times do |i| %>
+        <li><%= link_to(i+1, params.merge( {:p => (i*10)} )) %></li>
+      <% end %>
+      <li><%= link_to('Next', params.merge( {:p => (@offset+10)} )) %></li>
+    </ul>
+  </div>
   <table class="table table-hover">
     <thead>
       <tr>
