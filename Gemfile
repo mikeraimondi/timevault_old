@@ -10,6 +10,7 @@ gem 'pg'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'pry'
 end
 
 group :test do
@@ -39,7 +40,6 @@ gem 'jquery-ui-rails'
 
 gem 'simple_form'
 
-gem 'timers'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

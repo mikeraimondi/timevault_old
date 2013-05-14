@@ -3,7 +3,7 @@
 <% end %>
 <div class="nav_active" id="edit-task">
   <%= simple_form_for( @task, :html => {class: 'form-horizontal' } ) do |f| %>
-
+  <%= f.error_notification %>
     <%= f.input :name %>
     <%= f.input :description, input_html: { cols: 60, rows: 3 } %>
   <div id="task_start" class="picker input-append well">
