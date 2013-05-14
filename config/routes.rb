@@ -1,4 +1,7 @@
 Timevault::Application.routes.draw do
+  resources :pomodoros
+
+
   devise_for :users
 
   resources :tasks
