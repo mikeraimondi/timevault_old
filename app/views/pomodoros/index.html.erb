@@ -15,8 +15,8 @@
   <% @pomodoros.each do |pomodoro| %>
     <tr>
       <% remain = time_remaining(pomodoro.start_time.since(25 * 60) ) %>
-      <td><%= pomodoro.start_time %></td>
-      <td><%= pomodoro.end_time %></td>
+      <td><%= pomodoro.start_time.to_formatted_s(:short) %></td>
+      <td><%= pomodoro.end_time ? pomodoro.end_time.to_formatted_s(:short) : "-" %></td>
       <td><%= pomodoro.paused %></td>
       <td><%= "#{remain[:minutes]}:#{remain[:seconds]}" %></td>
       <td><%= link_to 'Show', pomodoro %></td>
