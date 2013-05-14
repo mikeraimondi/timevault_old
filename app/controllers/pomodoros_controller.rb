@@ -6,6 +6,7 @@ class PomodorosController < ApplicationController
   # GET /pomodoros.json
   def index
     @pomodoros = current_user.pomodoros.all
+    @intervals = current_user.intervals.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -45,12 +46,10 @@ class PomodorosController < ApplicationController
   # POST /pomodoros.json
   def create
     @pomodoro = current_user.pomodoros.new(params[:pomodoro])
-    @pomodoro.start_time = DateTime.now
-    # @pomodoro.end_time = @pomodoro.start_time.since(60 * 25)
 
     respond_to do |format|
       if @pomodoro.save
-        format.html { redirect_to @pomodoro, notice: 'Pomodoro was successfully created.' }
+        format.html { redirect_to pomodoros_path, notice: 'Pomodoro was successfully created.' }
         format.json { render json: @pomodoro, status: :created, location: @pomodoro }
       else
         format.html { render action: "new" }

@@ -11,4 +11,5 @@ class User < ActiveRecord::Base
 
   has_many :tasks, :dependent => :destroy
   has_many :pomodoros, :dependent => :destroy
+  has_many :intervals, :through => :pomodoros
 end

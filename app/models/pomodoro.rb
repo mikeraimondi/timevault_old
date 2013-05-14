@@ -1,8 +1,12 @@
 class Pomodoro < ActiveRecord::Base
-  attr_accessible :end_time, :paused, :start_time
-
   belongs_to :user
 
-  validates :start_time, presence: true
+  has_many :intervals, :dependent => :destroy
 
+  after_create :create_interval
+
+  private
+    def create_interval
+      self.intervals.create(start: DateTime.now)
+    end
 end

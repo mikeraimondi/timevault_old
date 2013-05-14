@@ -1,32 +1,13 @@
 <div class="nav_active" id="all_pomodoros">
-  <h1>Listing pomodoros</h1>
-
-  <table>
-    <tr>
-      <th>Start time</th>
-      <th>End time</th>
-      <th>Paused</th>
-      <th>Remaining</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-
-  <% @pomodoros.each do |pomodoro| %>
-    <tr>
-      <% remain = time_remaining(pomodoro.start_time.since(25 * 60) ) %>
-      <td><%= pomodoro.start_time.to_formatted_s(:short) %></td>
-      <td><%= pomodoro.end_time ? pomodoro.end_time.to_formatted_s(:short) : "-" %></td>
-      <td><%= pomodoro.paused %></td>
-      <td><%= "#{remain[:minutes]}:#{remain[:seconds]}" %></td>
-      <td><%= link_to 'Show', pomodoro %></td>
-      <td><%= link_to 'Edit', edit_pomodoro_path(pomodoro) %></td>
-      <td><%= link_to 'Destroy', pomodoro, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-  </table>
-
-  <br />
-
-  <%= link_to 'New Pomodoro', new_pomodoro_path %>
+  <ul>
+    <% @pomodoros.each do |pomodoro| %>
+    <li>Pomodoro</li>
+    <ul>
+      <% @intervals.each do |interval| %>
+        <li><%= "#{interval.start} - #{interval.end}" %></li>
+      <% end %>
+    </ul>
+    <% end %>
+  </ul>
+  <%= link_to("New Pomodoro", new_pomodoro_path) %>
 </div>
