@@ -1,12 +1,7 @@
 <div class="nav_active" id="all_pomodoros">
   <ul>
     <% @pomodoros.each do |pomodoro| %>
-    <li>Pomodoro</li>
-    <ul>
-      <% @intervals.each do |interval| %>
-        <li><%= "#{interval.start} - #{interval.end}" %></li>
-      <% end %>
-    </ul>
+    <li><%= "Duration: #{pomodoro[:duration]}. Remaining: #{pomodoro[:remaining]}" %></li>
     <% end %>
   </ul>
   <%= link_to("New Pomodoro", new_pomodoro_path) %>
