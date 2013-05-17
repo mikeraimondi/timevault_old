@@ -93,6 +93,6 @@ class TasksController < ApplicationController
   end
 
   def get_current_time
-    DateTime.now.strftime('%m/%d/%Y %I:%M:%S %p')
+    DateTime.now.strftime('%d/%m/%Y %I:%M:%S %p')
   end
 end

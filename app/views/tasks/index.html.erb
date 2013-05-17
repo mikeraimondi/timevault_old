@@ -6,7 +6,7 @@
       <% else %>
         <li><%= link_to('Prev', params.merge( {:p => @prev_offset} )) %></li>
       <% end %>
-      <% last = false %>
+      <% last = true %>
       <% @page_count.times do |i| %>
         <% if (@offset > (i-1)*10) && (@offset <= i*10) %>
           <li class="active"><%= link_to(i+1, params.merge( {:p => (i*10)} )) %></li>

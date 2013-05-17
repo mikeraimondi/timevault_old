@@ -12,7 +12,7 @@ FactoryGirl.define do
   end
 
   factory :task do
-    name                  {"test"}
-    description           {"test task"}
+    name                  "test"
+    description           "test task"
   end
 end
