@@ -1,6 +1,8 @@
 class Task < ActiveRecord::Base
   attr_accessible :description, :end, :name, :start
 
+  scope :descending_start_date, order("start DESC")
+
   belongs_to :user
 
   validates_presence_of :name

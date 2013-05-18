@@ -6,17 +6,16 @@
 
   <%= f.input :start,
     as: :string,
-    wrapper_html: { :class => 'picker input-append', id: 'task_start'},
+    wrapper_html: {id: 'task_start'},
     input_html: { :'data-format' => "dd/MM/yyyy HH:mm:ss PP", placeholder: get_current_time },
     :wrapper => :datepicker %>
 
   <%= f.input :end,
     as: :string,
-    wrapper_html: { :class => 'picker input-append', id: 'task_end'},
+    wrapper_html: {id: 'task_end'},
     input_html: { :'data-format' => "dd/MM/yyyy HH:mm:ss PP", placeholder: get_current_time },
     :wrapper => :datepicker %>
 
-
   <%= f.button :submit %>
+  <small>* Indicates required field</small>
 <% end %>
-<p>* Indicates required field</p>

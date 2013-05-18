@@ -42,6 +42,8 @@ gem 'simple_form'
 
 gem 'validates_timeliness'
 
+gem 'kaminari'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

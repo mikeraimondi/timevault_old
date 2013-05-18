@@ -5,16 +5,8 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @offset = params[:p].to_i
-    @offset = 0 if @offset < 0
-    @next_offset = @offset + 10
-    if @offset == 0
-      @prev_offset = 0
-    else
-      @prev_offset = @offset - 10
-    end
-    @tasks = current_user.tasks.limit(10).offset(@offset).order("start DESC")
-    @page_count = (current_user.tasks.count/10.to_f).ceil
+    page_num = params[:page].to_i
+    @tasks = current_user.tasks.descending_start_date.page(page_num).per(10)
 
     respond_to do |format|
       format.html # index.html.erb

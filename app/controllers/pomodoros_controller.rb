@@ -98,7 +98,7 @@ class PomodorosController < ApplicationController
       if interval.end.present?
         diff = interval.end - interval.start
       else
-        diff = DateTime.now - interval.start.to_datetime
+        diff = lambda { DateTime.now - interval.start.to_datetime }.call
       end
       all_intervals_duration += diff
     end

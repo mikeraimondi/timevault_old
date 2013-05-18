@@ -37,6 +37,20 @@ SimpleForm.setup do |config|
     end
   end
 
+  config.wrappers :datepicker, :tag => 'div', :class => "picker control-group", :error_class => 'error' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.use :label
+    b.wrapper :tag => 'div', :class => 'picker controls' do |input|
+      input.wrapper :tag => 'div', :class => 'input-append' do |append|
+        append.use :input
+        append.use :addon, :wrap_with => { :tag => 'span', :class => 'add-on input-append' }
+      end
+      input.use :error, :wrap_with => { :tag => 'span', :class => 'help-inline' }
+      input.use :hint,  :wrap_with => { :tag => 'span', :class => 'help-block' }
+    end
+  end
+
   # Wrappers for forms and inputs using the Twitter Bootstrap toolkit.
   # Check the Bootstrap docs (http://twitter.github.com/bootstrap)
   # to learn about the different styles for forms and inputs,
