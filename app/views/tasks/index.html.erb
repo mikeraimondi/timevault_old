@@ -58,7 +58,7 @@
       <% end %>
       <td>
         <% if task.end %>
-          <%= distance_of_time_in_words(task.end - task.start) %>
+          <%= distance_of_time_in_words(task.start, task.end) %>
         <% else %>
            - 
         <% end %>
