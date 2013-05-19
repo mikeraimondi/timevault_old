@@ -44,6 +44,8 @@ gem 'validates_timeliness'
 
 gem 'kaminari'
 
+gem 'foreigner'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

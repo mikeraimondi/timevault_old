@@ -7,6 +7,8 @@ class Pomodoro < ActiveRecord::Base
 
   after_create :create_interval
 
+  validates_presence_of :duration
+
   private
     def create_interval
       self.intervals.create(start: DateTime.now)

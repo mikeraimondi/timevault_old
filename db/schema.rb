@@ -11,10 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130514210941) do
+ActiveRecord::Schema.define(:version => 20130519194753) do
 
   create_table "intervals", :force => true do |t|
-    t.datetime "start"
+    t.datetime "start",       :null => false
     t.datetime "end"
     t.integer  "pomodoro_id"
     t.datetime "created_at",  :null => false
@@ -22,16 +22,16 @@ ActiveRecord::Schema.define(:version => 20130514210941) do
   end
 
   create_table "pomodoros", :force => true do |t|
-    t.integer  "duration"
+    t.integer  "duration",   :null => false
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "tasks", :force => true do |t|
-    t.string   "name"
+    t.string   "name",        :null => false
     t.text     "description"
-    t.datetime "start"
+    t.datetime "start",       :null => false
     t.datetime "end"
     t.integer  "user_id"
     t.datetime "created_at",  :null => false
@@ -51,11 +51,15 @@ ActiveRecord::Schema.define(:version => 20130514210941) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.integer  "task_id"
-    t.integer  "pomodoro_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  add_foreign_key "intervals", "pomodoros", :name => "intervals_pomodoro_id_fk"
+
+  add_foreign_key "pomodoros", "users", :name => "pomodoros_user_id_fk"
+
+  add_foreign_key "tasks", "users", :name => "tasks_user_id_fk"
 
 end

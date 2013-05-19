@@ -96,34 +96,16 @@ class PomodorosController < ApplicationController
     pomodoro.intervals.each do |interval|
       diff = 0
       if interval.end.present?
-        diff = interval.end - interval.start
+        diff = (interval.end - interval.start) * 1.days
       else
-        diff = lambda { DateTime.now - interval.start.to_datetime }.call
+        dist = lambda { |past, now| (past - now) * 1.days }
+        diff = dist.call(DateTime.now, interval.start.to_datetime)
       end
       all_intervals_duration += diff
     end
-
-    pomodoro.duration - (all_intervals_duration.to_i * 1.day)
-  end
-
-
-  def interval_remaining(start_time, end_time)
-    interval_remaining = { weeks: 0, days: 0, hours: 0, minutes: 0, seconds: 0 }
-
-    if end_time - start_time >= 0
-      difference = end_time.to_i - start_time.to_i
-      seconds    =  difference % 60
-      difference = (difference - seconds) / 60
-      minutes    =  difference % 60
-      difference = (difference - minutes) / 60
-      hours      =  difference % 24
-      difference = (difference - hours)   / 24
-      days       =  difference % 7
-      weeks      = (difference - days)    /  7
-      interval_remaining = { weeks: weeks, days: days, hours: hours, minutes: minutes, seconds: seconds }
-    end
-
-    interval_remaining
+    time_left = (pomodoro.duration - all_intervals_duration)
+    time_left = 0 if time_left < 0
+    Time.at(time_left).utc.strftime("%H:%M:%S")
   end
 
 end
