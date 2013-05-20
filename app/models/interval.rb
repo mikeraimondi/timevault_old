@@ -3,5 +3,7 @@ class Interval < ActiveRecord::Base
 
   belongs_to :pomodoro
 
-  validates :start, presence: true
+  validates_presence_of :pomodoro
+
+  validates_presence_of :start
 end
