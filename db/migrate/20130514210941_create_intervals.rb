@@ -3,7 +3,7 @@ class CreateIntervals < ActiveRecord::Migration
     create_table :intervals do |t|
       t.datetime :start, :null => false
       t.datetime :end
-      t.integer  :pomodoro_id
+      t.integer :pomodoro_id
       t.foreign_key :pomodoros
 
       t.timestamps
