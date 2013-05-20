@@ -2,7 +2,7 @@ class Pomodoro < ActiveRecord::Base
   attr_accessible :duration
   
   belongs_to :user
-  has_many :intervals
+  has_many :intervals, :dependent => :destroy
 
   after_create :create_interval
 
