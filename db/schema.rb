@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130519194753) do
+ActiveRecord::Schema.define(:version => 20130521171019) do
+
+  create_table "commits", :force => true do |t|
+    t.string   "sha1"
+    t.integer  "repository_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "intervals", :force => true do |t|
     t.datetime "start",       :null => false
@@ -24,6 +31,19 @@ ActiveRecord::Schema.define(:version => 20130519194753) do
   create_table "pomodoros", :force => true do |t|
     t.integer  "duration",   :null => false
     t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "repositories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "task_commits", :force => true do |t|
+    t.integer  "task_id"
+    t.integer  "commit_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -56,9 +76,14 @@ ActiveRecord::Schema.define(:version => 20130519194753) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
+  add_foreign_key "commits", "repositories", :name => "commits_repository_id_fk"
+
   add_foreign_key "intervals", "pomodoros", :name => "intervals_pomodoro_id_fk"
 
   add_foreign_key "pomodoros", "users", :name => "pomodoros_user_id_fk"
+
+  add_foreign_key "task_commits", "commits", :name => "task_commits_commit_id_fk"
+  add_foreign_key "task_commits", "tasks", :name => "task_commits_task_id_fk"
 
   add_foreign_key "tasks", "users", :name => "tasks_user_id_fk"
 
