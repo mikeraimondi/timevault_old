@@ -9,7 +9,14 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
 
-  has_many :tasks, :inverse_of => :user, :dependent => :destroy
-  has_many :pomodoros, :inverse_of => :user, :dependent => :destroy
-  has_many :intervals, :inverse_of => :user, :through => :pomodoros, readonly: true
+  has_many  :tasks,
+            inverse_of: :user, 
+            dependent: :destroy
+  has_many  :pomodoros,
+            inverse_of: :user,
+            dependent: :destroy
+  has_many  :intervals,
+            inverse_of: :user,
+            through: :pomodoros,
+            readonly: true
 end
