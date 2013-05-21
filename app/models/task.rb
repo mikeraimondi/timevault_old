@@ -3,9 +3,9 @@ class Task < ActiveRecord::Base
 
   scope :descending_start_date, order("start DESC")
 
-  belongs_to :user
-
+  belongs_to :user, :inverse_of => :tasks
   validates_presence_of :user
+
   validates_presence_of :name
   validates_presence_of :start
 
