@@ -12,7 +12,11 @@ FactoryGirl.define do
   end
 
   factory :task do
-    name                  "test"
+    name                  "test task"
     start                 DateTime.now 
+  end
+
+  factory :repository do
+    name                  "test repo"
   end
 end

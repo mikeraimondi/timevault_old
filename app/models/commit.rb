@@ -1,9 +1,9 @@
 class Commit < ActiveRecord::Base
   attr_accessible :repository_id, :sha1
 
-  has_many  :commits,
+  has_many  :tasks,
             through: :task_commits,
-            inverse_of: :commit
+            inverse_of: :commits
 
   belongs_to  :repository,
               inverse_of: :commits
