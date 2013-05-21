@@ -8,7 +8,7 @@
     <%= f.input :password %>
 
     <% if devise_mapping.rememberable? -%>
-      <%= f.input :remember_me, as: :boolean, label: false, inline_label: 'Yes, remember me' %>
+      <%= f.input :remember_me, as: :boolean, label: false, inline_label: 'Remember me' %>
     <% end %>
     
     <%= f.button :submit, "Sign in" %>
