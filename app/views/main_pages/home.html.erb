@@ -4,7 +4,11 @@
       <h1>TimeVault <small>Your Simple Time Tracker</small></h1>
     </div>
     <p class="lead">TimeVault lets you track the time you spend on tasks! Soon it will also track your Pomodoros.</p>
-    <%= button_to('Get Started', new_user_registration_path, class: "btn btn-large btn-success", method: :get) %>
+    <%= 
+      link_to_unless(user_signed_in?, 'Get Started', new_user_registration_path, class: "btn btn-large btn-success") do |name|
+      link_to('Get Started', tasks_path, class: "btn btn-large btn-success")
+      end 
+    %>
   </div>
 
 </div>

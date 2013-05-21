@@ -1,6 +1,5 @@
 <%= simple_form_for(@task) do |f| %>
   <%= f.error_notification %>
-  <div class="form-actions">
   <%= f.input :name %>
   <%= f.input :description, input_html: { cols: 60, rows: 3 } %>
 
