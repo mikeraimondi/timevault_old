@@ -16,4 +16,6 @@ describe Task do
 
   it { should allow_value(DateTime.now).for(:start) }
   it { should allow_value(DateTime.now).for(:end) }
+
+  it { should have_many(:commits) }
 end

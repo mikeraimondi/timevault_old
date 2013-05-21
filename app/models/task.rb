@@ -5,6 +5,10 @@ class Task < ActiveRecord::Base
 
   belongs_to :user
 
+  has_many :task_commits
+  has_many  :commits,
+            through: :task_commits
+
   validates_presence_of :user
   validates_presence_of :name
   validates_presence_of :start
