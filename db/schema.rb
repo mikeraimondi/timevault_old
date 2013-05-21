@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(:version => 20130521171019) do
 
   create_table "commits", :force => true do |t|
-    t.string   "sha1"
+    t.string   "sha1",          :null => false
     t.integer  "repository_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(:version => 20130521171019) do
   end
 
   create_table "repositories", :force => true do |t|
-    t.string   "name"
+    t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
