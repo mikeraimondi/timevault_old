@@ -7,13 +7,10 @@
 <ul class="nav">
   <% if user_signed_in? %>
     <li id="add_task">
-    <%= link_to "Add Task", new_task_path %>
+    <%= link_to "New Task", new_task_path %>
     </li>
     <li id="all_tasks">
-    <%= link_to "All Tasks", tasks_path %>
-    </li>
-    <li id="all_pomodoros">
-    <%= link_to "All Pomodoros", pomodoros_path %>
+    <%= link_to "Tasks", tasks_path %>
     </li>
   <% else %>
     <li id="login">
@@ -26,6 +23,12 @@
 </ul>
 <div class="nav-collapse collapse">
   <ul class="nav">
+    <li id="all_repositories">
+    <%= link_to "Manage Repositories", repositories_path %>
+    </li>
+    <li id="all_pomodoros">
+    <%= link_to "Pomodoros", pomodoros_path %>
+    </li>
     <li id="about">
     <%= link_to('About', about_path) %>
     </li>

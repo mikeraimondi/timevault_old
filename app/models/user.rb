@@ -12,11 +12,22 @@ class User < ActiveRecord::Base
   has_many  :tasks,
             inverse_of: :user, 
             dependent: :destroy
+
   has_many  :pomodoros,
             inverse_of: :user,
             dependent: :destroy
+
   has_many  :intervals,
             inverse_of: :user,
             through: :pomodoros,
+            readonly: true
+
+  has_many  :repositories,
+            inverse_of: :user,
+            dependent: :destroy
+
+  has_many  :commits,
+            through: :repositories,
+            inverse_of: :user,
             readonly: true
 end
