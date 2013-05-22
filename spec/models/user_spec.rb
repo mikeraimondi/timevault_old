@@ -8,6 +8,8 @@ describe User do
 
   it { should have_many(:intervals) }
 
+  # it { should have_many( :repositories ) }
+
   let(:user) { FactoryGirl.create(:user) }
   it "has email foo@bar.com" do
     user.email.should == 'foo@bar.com'
