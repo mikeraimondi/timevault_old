@@ -15,13 +15,10 @@
     input_html: { :'data-format' => "dd/MM/yyyy HH:mm:ss PP", placeholder: get_current_time },
     :wrapper => :datepicker %>
 
-  <%= simple_fields_for :commits do |commit_form| %>
+  <%= f.simple_fields_for :commits do |commit_form| %>
     <%= commit_form.input :sha1 %>
-    <%= simple_fields_for :repository do |repo_form| %>
-      <%= repo_form.input :name %>
-    <%- end -%>
+    <%= commit_form.input :repository_id, collection: @task.user.repositories %>
   <%- end -%>
-
 
   <%= f.button :submit %>
   <small>* Indicates required field</small>

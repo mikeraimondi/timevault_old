@@ -1,16 +1,17 @@
 class Task < ActiveRecord::Base
-  attr_accessible :description, :end, :name, :start
+  attr_accessible :description, :end, :name, :start, :commits_attributes
 
   scope :descending_start_date, order("start DESC")
 
-  belongs_to :user
+  belongs_to :user, inverse_of: :tasks
 
   has_many :task_commits
   has_many  :commits,
             through: :task_commits,
             dependent: :destroy,
             inverse_of: :tasks
-  accepts_nested_attributes_for :commits, allow_destroy: true
+  accepts_nested_attributes_for :commits,
+                                reject_if: lambda { |a| a[:sha1].blank? && a[:repository_id].blank? }
 
   validates_presence_of :user
   validates_presence_of :name

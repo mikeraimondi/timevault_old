@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(:version => 20130521171019) do
 
   create_table "repositories", :force => true do |t|
     t.string   "name",       :null => false
+    t.string   "url",        :null => false
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -81,6 +83,8 @@ ActiveRecord::Schema.define(:version => 20130521171019) do
   add_foreign_key "intervals", "pomodoros", :name => "intervals_pomodoro_id_fk"
 
   add_foreign_key "pomodoros", "users", :name => "pomodoros_user_id_fk"
+
+  add_foreign_key "repositories", "users", :name => "repositories_user_id_fk"
 
   add_foreign_key "task_commits", "commits", :name => "task_commits_commit_id_fk"
   add_foreign_key "task_commits", "tasks", :name => "task_commits_task_id_fk"

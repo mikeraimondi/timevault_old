@@ -18,5 +18,6 @@ FactoryGirl.define do
 
   factory :repository do
     name                  "test repo"
+    url                   "http://github.com/foo/test_repo"
   end
 end

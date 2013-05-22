@@ -23,6 +23,7 @@
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu">
+            <li><%= link_to('<i class="icon-eye-open"></i> '.html_safe + "Show", task) %></li>
             <li><%= link_to('<i class="icon-remove"></i> '.html_safe + "Delete", task, method: :delete, data: { confirm: 'Are you sure?' } ) %></li>
           </ul>
         </div>
