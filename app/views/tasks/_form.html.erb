@@ -19,12 +19,14 @@
   <div id="commits">
     <%= f.simple_fields_for :commits do |commit| %>
       <%= render 'commit_fields', f: commit %>
-      <div class="links">
-        <%= link_to_add_association('add commits', f, :commits, :force_non_association_create => true) %>
-      </div>
     <% end %>
+    <div class="links">
+      <%= link_to_add_association 'Add Commit', f, :commits, :class => "btn btn-small" %>
+    </div>
   </div>
 
-  <%= f.button :submit %>
-  <small>* Indicates required field</small>
+  <div class="well">
+    <%= f.button :submit, :class => "btn-primary" %>
+    <small>* Indicates required field</small>
+  </div>
 <% end %>
