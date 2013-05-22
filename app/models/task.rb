@@ -8,8 +8,9 @@ class Task < ActiveRecord::Base
   has_many :task_commits
   has_many  :commits,
             through: :task_commits,
+            dependent: :destroy,
             inverse_of: :tasks
-  # accepts_nested_attributes_for :commits
+  accepts_nested_attributes_for :commits, allow_destroy: true
 
   validates_presence_of :user
   validates_presence_of :name

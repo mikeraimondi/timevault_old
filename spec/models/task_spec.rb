@@ -19,17 +19,17 @@ describe Task do
 
   it { should have_many(:commits) }
 
-  describe "has nested attributes on Commit" do
-    it "saves a new commit" do
-      user = FactoryGirl.create(:user)
-      task = FactoryGirl.build(:task)
-      task.user = user
-      task.save
-      repository = FactoryGirl.create(:repository)
-      commit = task.commits.new 
-      commit.sha1 = '99176f8869f182b1e183792c9e445d34f4dfb7b3'
-      commit.repository = repository
-      expect(commit.save).to eq(true)
-    end
+  it "saves a new commit" do
+    user = FactoryGirl.create(:user)
+    task = FactoryGirl.build(:task)
+    task.user = user
+    task.save
+    repository = FactoryGirl.create(:repository)
+    commit = task.commits.new 
+    commit.sha1 = '99176f8869f182b1e183792c9e445d34f4dfb7b3'
+    commit.repository = repository
+    expect(commit.save).to eq(true)
   end
+
+  it { should accept_nested_attributes_for(:commits)}
 end

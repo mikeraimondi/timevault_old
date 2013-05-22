@@ -9,6 +9,8 @@ class Commit < ActiveRecord::Base
               inverse_of: :commits
   validates_presence_of :repository
 
+  accepts_nested_attributes_for :repository
+
   validates_presence_of :sha1
   validates_length_of :sha1, is: 40
 
