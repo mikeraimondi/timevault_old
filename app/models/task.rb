@@ -11,7 +11,8 @@ class Task < ActiveRecord::Base
             dependent: :destroy,
             inverse_of: :tasks
   accepts_nested_attributes_for :commits,
-                                reject_if: lambda { |a| a[:sha1].blank? && a[:repository_id].blank? }
+                                reject_if: :all_blank,
+                                allow_destroy: true
 
   validates_presence_of :user
   validates_presence_of :name
