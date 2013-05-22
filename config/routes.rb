@@ -1,12 +1,14 @@
 Timevault::Application.routes.draw do
 
+  devise_for :users
+
   resources :pomodoros do
     resources :intervals
   end
 
-  devise_for :users
-
   resources :tasks
+
+  resources :repositories
 
   root :to => "main_pages#home"
 
