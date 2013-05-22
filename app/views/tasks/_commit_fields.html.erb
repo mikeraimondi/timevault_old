@@ -1,0 +1,5 @@
+<div class="nested-fields">
+  <%= f.input :sha1 %>
+  <%= f.input :repository_id, collection: @task.user.repositories %>
+  <%= link_to_remove_association "remove commit", f %>
+</div>

@@ -15,10 +15,15 @@
     input_html: { :'data-format' => "dd/MM/yyyy HH:mm:ss PP", placeholder: get_current_time },
     :wrapper => :datepicker %>
 
-  <%= f.simple_fields_for :commits do |commit_form| %>
-    <%= commit_form.input :sha1 %>
-    <%= commit_form.input :repository_id, collection: @task.user.repositories %>
-  <%- end -%>
+  <h3>Commits</h3>
+  <div id="commits">
+    <%= f.simple_fields_for :commits do |commit| %>
+      <%= render 'commit_fields', f: commit %>
+      <div class="links">
+        <%= link_to_add_association('add commits', f, :commits, :force_non_association_create => true) %>
+      </div>
+    <% end %>
+  </div>
 
   <%= f.button :submit %>
   <small>* Indicates required field</small>
