@@ -10,7 +10,7 @@
       <% url = commit.repository.url %>
       <% url << '/' unless url =~ /\/$/ %>
       <% commit_url = "#{url}commit/#{commit.sha1}" %>
-      <li><%= link_to "Commit URL", commit_url %></li>
+      <li><%= link_to "Commit URL", commit_url, target: "_blank" %></li>
     <% end %>
   <% end %>
 </ul>
