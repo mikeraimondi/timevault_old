@@ -11,7 +11,7 @@
     </thead>
     <tbody>
     <% @tasks.each do |task| %>
-      <% if task.end %>
+      <% if task.end.present? %>
         <tr>
       <% else %>
         <tr class="warning">
@@ -29,13 +29,13 @@
           </div>
         </td>
         <td><%= task.start.strftime("%e %b %l:%M %p") %></td>
-        <% if task.end %>
+        <% if task.end.present? %>
           <td><%= task.end.strftime("%e %b %l:%M %p") %></td>
         <% else %>
           <td><%= link_to( "Add Ending", edit_task_path(task), class: "btn btn-small btn-warning") %></td>
         <% end %>
         <td>
-          <% if task.end %>
+          <% if task.end.present? %>
             <%= distance_of_time_in_words(task.start, task.end) %>
           <% else %>
              - 

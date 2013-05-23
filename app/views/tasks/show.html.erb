@@ -6,8 +6,12 @@
   <% @task.commits.each do |commit| %>
     <li> SHA1: <%=commit.sha1%></li>
     <li> Repo: <%=commit.repository.name%></li>
-    <% url = "#{commit.repository.url}/commit/#{commit.sha1}" %>
-    <li><%= link_to "Commit URL", url %></li>
+    <% if commit.repository.url.present? %>
+      <% url = commit.repository.url %>
+      <% url << '/' unless url =~ /\/$/ %>
+      <% commit_url = "#{url}commit/#{commit.sha1}" %>
+      <li><%= link_to "Commit URL", commit_url %></li>
+    <% end %>
   <% end %>
 </ul>
 <%= button_to('Delete', @task, method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } ) %>

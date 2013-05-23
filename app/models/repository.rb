@@ -2,7 +2,8 @@ class Repository < ActiveRecord::Base
   attr_accessible :name, :url
 
   validates_presence_of :name
-  validates_presence_of :url
+
+  validates :url, :url => {:allow_blank => true}
 
   has_many  :commits,
             dependent: :destroy,
