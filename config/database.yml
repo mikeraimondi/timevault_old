@@ -17,8 +17,6 @@ common: &common
   encoding: unicode
   host: localhost
   pool: 5
-  username: timevault
-  password: timevault
 
 development:
   <<: *common
