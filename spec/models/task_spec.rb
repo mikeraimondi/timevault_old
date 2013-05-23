@@ -20,10 +20,7 @@ describe Task do
   it { should have_many(:commits) }
 
   it "saves a new commit" do
-    user = FactoryGirl.create(:user)
-    task = FactoryGirl.build(:task)
-    task.user = user
-    task.save
+    task = FactoryGirl.create(:task)
     repository = FactoryGirl.create(:repository)
     commit = task.commits.new 
     commit.sha1 = '99176f8869f182b1e183792c9e445d34f4dfb7b3'

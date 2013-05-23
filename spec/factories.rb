@@ -1,6 +1,6 @@
 FactoryGirl.define do 
   factory :user do
-    email                 "foo@bar.com"
+    sequence(:email)      {|n| "email#{n}@gotimevault.com" }
     password              "foobar123"
     password_confirmation "foobar123"
   end
@@ -12,6 +12,7 @@ FactoryGirl.define do
   end
 
   factory :task do
+    user
     name                  "test task"
     start                 DateTime.now 
   end

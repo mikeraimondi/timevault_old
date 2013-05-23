@@ -17,15 +17,15 @@ feature 'Signing up' do
   end
 
   scenario  'Signing up with duplicate email' do
-    FactoryGirl.create(:user)
+    @user = FactoryGirl.create(:user)
     visit '/'
     within (".hero-unit") do
       click_link 'Get Started' 
     end
     within ("#new_user") do
-      fill_in 'Email', with: 'foo@bar.com'
-      fill_in 'Password', with: 'password'
-      fill_in 'Password confirmation', with: 'password'
+      fill_in 'Email', with: @user.email
+      fill_in 'Password', with: @user.password
+      fill_in 'Password confirmation', with: @user.password
       click_button 'Sign up'
     end
     page.should have_content 'Please review the problems below:'

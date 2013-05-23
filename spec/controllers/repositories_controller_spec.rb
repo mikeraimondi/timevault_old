@@ -7,7 +7,7 @@ describe RepositoriesController do
       user = FactoryGirl.create(:user)
       sign_in user
       get 'index'
-      response.should be_success
+      expect(response).to be_success
     end
   end
 

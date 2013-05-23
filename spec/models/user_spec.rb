@@ -14,7 +14,7 @@ describe User do
 
   let(:user) { FactoryGirl.create(:user) }
   it "has email foo@bar.com" do
-    user.email.should == 'foo@bar.com'
+    user.email.should =~ /@gotimevault.com$/
   end
 
 end
