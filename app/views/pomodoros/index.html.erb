@@ -1,7 +1,12 @@
 <div class="nav_active" id="all_pomodoros">
+  <%= simple_form_for(@pomodoro) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :duration %>
+    <%= f.button :submit, :class => "btn-primary" %>
+  <% end %>
   <ul>
     <% @pomodoros.each do |pomodoro| %>
-    <li><%= "Duration: #{pomodoro[:duration]}. Remaining: #{pomodoro[:remaining]}" %></li>
+    <li><%= "Duration: #{pomodoro.duration}. Remaining: #{pomodoro.duration_remaining}" %></li>
     <% end %>
   </ul>
 </div>

@@ -7,6 +7,14 @@ gem 'rails'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
+gem 'devise'
+gem 'simple_form'
+gem 'validates_timeliness'
+gem 'kaminari'
+gem 'foreigner'
+gem 'cocoon'
+gem 'validate_url'
+gem 'inherited_resources'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -33,22 +41,8 @@ group :assets do
   gem 'bootstrap-sass'
 end
 
-gem 'devise'
-
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-
-gem 'simple_form'
-
-gem 'validates_timeliness'
-
-gem 'kaminari'
-
-gem 'foreigner'
-
-gem 'cocoon'
-
-gem 'validate_url'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

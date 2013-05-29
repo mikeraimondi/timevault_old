@@ -1,33 +1,29 @@
-class PomodorosController < ApplicationController
+class PomodorosController < InheritedResources::Base
   before_filter :authenticate_user!
+  respond_to :html, :json
 
-  # GET /pomodoros
-  # GET /pomodoros.json
   def index
-    @pomodoros = []
-    current_user.pomodoros.all.each do |pomodoro|
-      pom_hash = { duration: pomodoro.duration,
-                  remaining: pomodoro.duration_remaining }
-      @pomodoros.push pom_hash
-    end
-    @pomodoros
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @pomodoros }
+    index! do
+      setup_pomodoros
     end
   end
 
-  # GET /pomodoros/1
-  # GET /pomodoros/1.json
-  def show
-    @pomodoro = current_user.pomodoros.find(params[:id])
+  def create
+    create! do |format|
+      @pomodoro = current_user.pomodoros.new(params[:pomodoro])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @pomodoro }
+      if @pomodoro.save
+        format.html { redirect_to pomodoros_path, notice: 'Pomodoro was successfully created' }
+      else
+        setup_pomodoros
+        format.html { render action: "index" }
+      end
     end
   end
 
+  def setup_pomodoros
+    @pomodoros = current_user.pomodoros.all
+    @pomodoro ||= current_user.pomodoros.new
+  end
 
 end
