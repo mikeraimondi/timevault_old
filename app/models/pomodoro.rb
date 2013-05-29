@@ -11,6 +11,24 @@ class Pomodoro < ActiveRecord::Base
 
   validates_presence_of :duration
 
+  def duration_remaining
+    all_intervals_duration = 0
+
+    self.intervals.each do |interval|
+      diff = 0
+      if interval.end.present?
+        diff = (interval.end - interval.start) * 1.days
+      else
+        dist = lambda { |past, now| (past - now) * 1.days }
+        diff = dist.call(DateTime.now, interval.start.to_datetime)
+      end
+      all_intervals_duration += diff
+    end
+    time_left = (self.duration - all_intervals_duration)
+    time_left = 0 if time_left < 0
+    Time.at(time_left).utc.strftime("%H:%M:%S")
+  end
+
   private
     def create_interval
       self.intervals.create(start: DateTime.now)
