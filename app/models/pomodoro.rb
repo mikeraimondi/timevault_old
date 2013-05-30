@@ -29,6 +29,13 @@ class Pomodoro < ActiveRecord::Base
     Time.at(time_left).utc.strftime("%H:%M:%S")
   end
 
+  def running?
+    self.intervals.each do |interval|
+      return true unless interval.end.present?
+    end
+    false
+  end
+
   private
     def create_interval
       self.intervals.create(start: DateTime.now)

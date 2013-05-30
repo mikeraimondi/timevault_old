@@ -30,4 +30,12 @@ class User < ActiveRecord::Base
             through: :repositories,
             inverse_of: :user,
             readonly: true
+
+  def timer_running?
+    self.pomodoros.each do |pomodoro|
+      return true if pomodoro.running?
+    end
+    false
+  end
+
 end

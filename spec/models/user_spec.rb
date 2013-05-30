@@ -17,4 +17,17 @@ describe User do
     user.email.should =~ /@gotimevault.com$/
   end
 
+  describe "indicates whether a pomodoro is currently running" do
+    let(:user) { FactoryGirl.create(:user) }
+
+    it "indicates that one is not running" do
+      expect( user.timer_running? ).to eql(false)
+    end
+
+    it "indicates that one is running" do
+      pomodoro = user.pomodoros.create(duration: 10)
+      expect( user.timer_running? ).to eql(true)
+    end
+  end
+
 end
