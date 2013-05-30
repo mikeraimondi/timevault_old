@@ -12,7 +12,10 @@ class PomodorosController < InheritedResources::Base
     create! do |format|
       @pomodoro = current_user.pomodoros.new(params[:pomodoro])
 
-      if @pomodoro.save
+      if current_user.timer_running?
+        setup_pomodoros
+        format.html { redirect_to pomodoros_path, alert: 'Error: pomodoro is already running' }
+      elsif @pomodoro.save
         format.html { redirect_to pomodoros_path, notice: 'Pomodoro was successfully created' }
       else
         setup_pomodoros

@@ -32,7 +32,18 @@ feature "Starting a pomodoro timer", %Q{
     visit pomodoros_path
     fill_in "Duration", with: "10"
     click_button "Create Pomodoro"
-    page.should have_content "Error: pomodoro already running"
+    page.should have_content "pomodoro is already running"
+  end
+
+  scenario "with an expired pomodoro" do
+    visit pomodoros_path
+    fill_in "Duration", with: "1"
+    click_button "Create Pomodoro"
+    sleep 2
+    visit pomodoros_path
+    fill_in "Duration", with: "10"
+    click_button "Create Pomodoro"
+    page.should have_content "Pomodoro was successfully created"
   end
 
   scenario "with an invalid duration" 
