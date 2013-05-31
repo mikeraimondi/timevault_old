@@ -11,6 +11,8 @@ class Pomodoro < ActiveRecord::Base
 
   validates_presence_of :duration
 
+  validates :duration, numericality: { only_integer: true, greater_than: 0 }   
+
   def duration_remaining
     all_intervals_duration = 0
 
@@ -24,16 +26,27 @@ class Pomodoro < ActiveRecord::Base
       end
       all_intervals_duration += diff
     end
+
+    self.duration ||= 0
     time_left = (self.duration - all_intervals_duration)
     time_left = 0 if time_left < 0
+
+    time_left
+  end
+
+  def duration_string
+    time_left = duration_remaining
     Time.at(time_left).utc.strftime("%H:%M:%S")
   end
 
   def running?
-    self.intervals.each do |interval|
-      return true unless interval.end.present?
-    end
-    false
+    duration = lambda { duration_remaining > 0 } 
+    result = duration.call
+    result
+    # self.intervals.each do |interval|
+    #   return true unless interval.end.present?
+    # end
+    # false
   end
 
   private

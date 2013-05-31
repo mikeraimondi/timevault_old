@@ -15,6 +15,7 @@ gem 'foreigner'
 gem 'cocoon'
 gem 'validate_url'
 gem 'inherited_resources'
+gem 'delayed_job_active_record'
 
 group :development, :test do
   gem 'rspec-rails'

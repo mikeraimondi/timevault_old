@@ -6,7 +6,7 @@
   <% end %>
   <ul>
     <% @pomodoros.each do |pomodoro| %>
-    <li><%= "Duration: #{pomodoro.duration}. Remaining: #{pomodoro.duration_remaining}" %></li>
+    <li><%= "Duration: #{pomodoro.duration}. Remaining: #{pomodoro.duration_string}" %></li>
     <% end %>
   </ul>
 </div>
