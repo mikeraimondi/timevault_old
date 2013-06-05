@@ -7,8 +7,6 @@ class Pomodoro < ActiveRecord::Base
   has_many  :intervals, inverse_of: :pomodoro,
             dependent: :destroy
 
-  after_create :create_interval
-
   validates_presence_of :duration
 
   validates :duration, numericality: { only_integer: true, greater_than: 0 }   
@@ -21,6 +19,7 @@ class Pomodoro < ActiveRecord::Base
       if interval.end.present?
         diff = (interval.end - interval.start) * 1.days
       else
+        #TODO refactor out lambda
         dist = lambda { |past, now| (past - now) * 1.days }
         diff = dist.call(DateTime.now, interval.start.to_datetime)
       end
@@ -43,14 +42,6 @@ class Pomodoro < ActiveRecord::Base
     duration = lambda { duration_remaining > 0 } 
     result = duration.call
     result
-    # self.intervals.each do |interval|
-    #   return true unless interval.end.present?
-    # end
-    # false
   end
 
-  private
-    def create_interval
-      self.intervals.create(start: DateTime.now)
-    end
 end

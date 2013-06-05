@@ -10,7 +10,7 @@ class PomodorosController < InheritedResources::Base
 
   def create
     create! do |format|
-      @pomodoro = current_user.pomodoros.new(params[:pomodoro])
+      @pomodoro = PomodoroMaker.new(current_user, params[:pomodoro]).make_pomodoro
 
       if current_user.timer_running?
         setup_pomodoros

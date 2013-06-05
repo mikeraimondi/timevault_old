@@ -8,15 +8,16 @@ class Interval < ActiveRecord::Base
 
   validates_presence_of :start
 
-  after_create :delayed_cleanup
+  after_commit :create_interval_worker
 
-  def delayed_cleanup
-    cleanup.delay({run_at: Proc.new { when_to_run } })
+  def create_interval_worker
+    Delayed::Job.enqueue(IntervalWorker.new(self.id), run_at: when_to_run)
   end
 
-  def cleanup
-    if self.pomodoro.duration_remaining > 0
-      self.end = DateTime.now
+  def clean_up!
+    if self.pomodoro.duration_remaining == 0
+      self.end ||= DateTime.now
+      self.save!
     end
   end
 

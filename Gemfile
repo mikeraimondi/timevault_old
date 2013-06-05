@@ -16,6 +16,8 @@ gem 'cocoon'
 gem 'validate_url'
 gem 'inherited_resources'
 gem 'delayed_job_active_record'
+gem 'daemons'
+gem 'unicorn'
 
 group :development, :test do
   gem 'rspec-rails'

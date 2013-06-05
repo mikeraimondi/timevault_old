@@ -46,5 +46,18 @@ feature "Starting a pomodoro timer", %Q{
     page.should have_content "Pomodoro was successfully created"
   end
 
-  scenario "with an invalid duration" 
+  scenario "with a negative duration" do
+    visit pomodoros_path
+    fill_in "Duration", with: "-5"
+    click_button "Create Pomodoro"
+    page.should have_content "must be greater than 0"
+  end
+
+  scenario "with a zero duration" do
+    visit pomodoros_path
+    fill_in "Duration", with: "0"
+    click_button "Create Pomodoro"
+    page.should have_content "must be greater than 0"
+  end
+
 end
