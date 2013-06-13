@@ -11,7 +11,7 @@ class Interval < ActiveRecord::Base
   after_commit :create_interval_worker
 
   def create_interval_worker
-    Delayed::Job.enqueue(IntervalWorker.new(self.id), run_at: when_to_run)
+    @job = Delayed::Job.enqueue(IntervalWorker.new(self.id), run_at: when_to_run)
   end
 
   def clean_up!
@@ -19,6 +19,7 @@ class Interval < ActiveRecord::Base
       self.end ||= DateTime.now
       self.save!
     end
+    @job.destroy
   end
 
   def when_to_run

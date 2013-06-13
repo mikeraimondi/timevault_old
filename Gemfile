@@ -18,6 +18,7 @@ gem 'inherited_resources'
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'unicorn'
+gem "hirefire-resource"
 
 group :development, :test do
   gem 'rspec-rails'
