@@ -7,6 +7,5 @@ describe Pomodoro do
   it { should validate_presence_of(:duration) }
 
   it { should have_many(:intervals) }
-  it { should validate_presence_of(:intervals) }
 
 end

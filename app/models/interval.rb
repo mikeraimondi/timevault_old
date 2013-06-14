@@ -19,7 +19,7 @@ class Interval < ActiveRecord::Base
       self.end ||= DateTime.now
       self.save!
     end
-    @job.destroy
+    @job.destroy if @job
   end
 
   def when_to_run

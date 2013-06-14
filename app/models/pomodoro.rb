@@ -17,7 +17,7 @@ class Pomodoro < ActiveRecord::Base
     self.intervals.each do |interval|
       diff = 0
       if interval.end.present?
-        diff = (interval.end - interval.start) * 1.days
+        diff = (interval.end.to_datetime - interval.start.to_datetime) * 1.days
       else
         #TODO refactor out lambda
         dist = lambda { |past, now| (past - now) * 1.days }
@@ -33,6 +33,18 @@ class Pomodoro < ActiveRecord::Base
     time_left
   end
 
+  def pause_unpause!
+    if running?
+      if open_interval
+        int = open_interval
+        int.end = DateTime.now
+        int.save
+      else
+        intervals.create(start: DateTime.now)
+      end
+    end
+  end
+
   def duration_string
     time_left = duration_remaining
     Time.at(time_left).utc.strftime("%H:%M:%S")
@@ -42,6 +54,18 @@ class Pomodoro < ActiveRecord::Base
     duration = lambda { duration_remaining > 0 } 
     result = duration.call
     result
+  end
+
+  def paused?
+    running? && !(open_interval)
+  end
+
+  private
+
+  def open_interval
+    intervals.each { |interval| return interval unless interval.end.present? }
+
+    false
   end
 
 end

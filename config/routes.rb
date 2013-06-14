@@ -2,11 +2,11 @@ Timevault::Application.routes.draw do
 
   devise_for :users
 
-  resources :pomodoros
+  resources :pomodoros, only: [:index, :create, :update]
 
   resources :tasks
 
-  resources :repositories
+  resources :repositories, only: [:index, :create, :destroy]
 
   root :to => "main_pages#home"
 

@@ -1,6 +1,7 @@
 class PomodorosController < InheritedResources::Base
   before_filter :authenticate_user!
   respond_to :html, :json
+  actions :index, :create, :update
 
   def index
     index! do
@@ -24,8 +25,23 @@ class PomodorosController < InheritedResources::Base
     end
   end
 
+  def update
+    update! do |format|
+      @pomodoro = current_user.pomodoros.find(params[:id])
+
+      if @pomodoro.update_attributes(params[:pomodoro])
+        @pomodoro.pause_unpause!
+        format.html { redirect_to pomodoros_path, notice: 'Task was successfully updated.'}
+        format.json { head :no_content }
+      else
+        format.html { render action: "index" }
+        format.json { render json: @pomodoro.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def setup_pomodoros
-    @pomodoros = current_user.pomodoros.all
+    @pomodoros = current_user.pomodoros.order("created_at DESC")
     @pomodoro ||= current_user.pomodoros.new
   end
 

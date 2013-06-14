@@ -17,6 +17,7 @@ describe PomodoroMaker do
     end
 
     it "returns a pomodoro with an interval" do
+      expect(pomodoro.save).to be_true
       expect(pomodoro.intervals.count).to eql(1)
     end
 
@@ -24,17 +25,16 @@ describe PomodoroMaker do
       expect(pomodoro.intervals.first).to be_valid
     end
 
-    it "returns a pomodor that hasn't been saved"
-
   end
 
   context "with invalid params" do
 
-    it "returns false" do
+    it "returns an invalid pomodoro" do
       invalid_params = params.dup
       invalid_params[:duration] = 0
       maker = PomodoroMaker.new(user, invalid_params)
-      expect(maker.make_pomodoro).to be_false
+      pomodoro = maker.make_pomodoro
+      expect(pomodoro).to_not be_valid
     end
 
   end

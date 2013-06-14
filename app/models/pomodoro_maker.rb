@@ -9,7 +9,6 @@ class PomodoroMaker
   def make_pomodoro
     @pomodoro = @user.pomodoros.new(@params)
     @pomodoro.intervals.build(start: DateTime.now)
-    
 
     @pomodoro
   end
