@@ -1,6 +1,8 @@
 class Pomodoro < ActiveRecord::Base
   attr_accessible :duration
   
+  before_destroy :destroy_workers
+
   belongs_to :user, inverse_of: :pomodoros
   validates_presence_of :user
 
@@ -58,6 +60,10 @@ class Pomodoro < ActiveRecord::Base
 
   def paused?
     running? && !(open_interval)
+  end
+
+  def destroy_workers
+    intervals.each { |interval| interval.destroy_worker! }
   end
 
   private

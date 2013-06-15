@@ -8,18 +8,27 @@ class Interval < ActiveRecord::Base
 
   validates_presence_of :start
 
-  after_commit :create_interval_worker
+  after_create :create_interval_worker
 
   def create_interval_worker
-    @job = Delayed::Job.enqueue(IntervalWorker.new(self.id), run_at: when_to_run)
+    job = Delayed::Job.enqueue(IntervalWorker.new(self.id), run_at: when_to_run)
+    self.worker_id = job.id 
+    self.save
   end
 
   def clean_up!
     if self.pomodoro.duration_remaining == 0
       self.end ||= DateTime.now
-      self.save!
+      self.save
     end
-    @job.destroy if @job
+    destroy_worker!
+  end
+
+  def destroy_worker!
+    begin
+      Delayed::Job.find(worker_id).destroy
+    rescue ActiveRecord::RecordNotFound
+    end
   end
 
   def when_to_run

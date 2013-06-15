@@ -2,7 +2,7 @@ Timevault::Application.routes.draw do
 
   devise_for :users
 
-  resources :pomodoros, only: [:index, :create, :update]
+  resources :pomodoros, only: [:index, :create, :update, :destroy]
 
   resources :tasks
 

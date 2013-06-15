@@ -62,7 +62,6 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    # binding.pry
     @task = current_user.tasks.new(params[:task])
 
     respond_to do |format|

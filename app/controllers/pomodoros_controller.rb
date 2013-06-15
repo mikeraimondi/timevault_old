@@ -1,7 +1,7 @@
 class PomodorosController < InheritedResources::Base
   before_filter :authenticate_user!
   respond_to :html, :json
-  actions :index, :create, :update
+  actions :index, :create, :update, :destroy
 
   def index
     index! do
