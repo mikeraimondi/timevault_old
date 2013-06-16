@@ -17,15 +17,17 @@ class Pomodoro < ActiveRecord::Base
     all_intervals_duration = 0
 
     self.intervals.each do |interval|
-      diff = 0
-      if interval.end.present?
-        diff = (interval.end.to_datetime - interval.start.to_datetime) * 1.days
-      else
-        #TODO refactor out lambda
-        dist = lambda { |past, now| (past - now) * 1.days }
-        diff = dist.call(DateTime.now, interval.start.to_datetime)
+      unless interval.new_record?
+        diff = 0
+        if interval.end.present?
+          diff = (interval.end.to_datetime - interval.start.to_datetime) * 1.days
+        else
+          #TODO refactor out lambda
+          dist = lambda { |past, now| (past - now) * 1.days }
+          diff = dist.call(DateTime.now, interval.start.to_datetime)
+        end
+        all_intervals_duration += diff
       end
-      all_intervals_duration += diff
     end
 
     self.duration ||= 0

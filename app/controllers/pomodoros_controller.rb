@@ -31,8 +31,7 @@ class PomodorosController < InheritedResources::Base
 
       if @pomodoro.update_attributes(params[:pomodoro])
         @pomodoro.pause_unpause!
-        format.html { redirect_to pomodoros_path, notice: 'Task was successfully updated.'}
-        format.json { head :no_content }
+        format.html { redirect_to pomodoros_path, notice: 'Pomodoro was successfully updated.'}
       else
         format.html { render action: "index" }
         format.json { render json: @pomodoro.errors, status: :unprocessable_entity }
