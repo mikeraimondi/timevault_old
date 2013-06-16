@@ -1,5 +1,5 @@
 class Interval < ActiveRecord::Base
-  attr_accessible :start, :end
+  attr_accessible :start, :end, :worker_id
 
   belongs_to  :pomodoro,
               inverse_of: :intervals
