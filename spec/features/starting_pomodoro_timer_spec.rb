@@ -1,8 +1,6 @@
 require 'spec_helper'
 include Warden::Test::Helpers
 
-Warden.test_mode!
-
 feature "Starting a pomodoro timer", %Q{
   As a user
   I want to start a pomodoro timer
@@ -14,8 +12,16 @@ feature "Starting a pomodoro timer", %Q{
   #
 
   given(:user) { FactoryGirl.create(:user) }
+
   background do
+    Warden.test_mode!
+    user.confirmed_at = Time.now
+    user.save
     login_as(user, scope: :user)
+  end
+
+  after :each do
+    Warden.test_reset!
   end
 
   scenario "with no currently running pomodoros" do
