@@ -66,6 +66,10 @@ class Pomodoro < ActiveRecord::Base
 
   def destroy_workers
     intervals.each { |interval| interval.destroy_worker! }
+  end 
+
+  def send_pomodoro_notification_email!
+    UserMailer.pomodoro_notification(user).deliver
   end
 
   private

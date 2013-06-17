@@ -17,10 +17,13 @@ class Interval < ActiveRecord::Base
   end
 
   def clean_up!
-    if self.pomodoro.duration_remaining == 0
+    if pomodoro.duration_remaining == 0
       unless self.end.present?
         self.end = DateTime.now
-        self.save
+        if self.save
+          pomodoro.send_pomodoro_notification_email!
+          binding.pry
+        end
       end
     end
     destroy_worker!

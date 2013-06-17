@@ -3,7 +3,7 @@ class UserMailer < ActionMailer::Base
 
   def pomodoro_notification(user)
     @user = user
-    @url = pomodoros_path
-    mail(to: user.email, subject: "Pomodoro completed")
+    @url = pomodoros_url
+    mail(to: user.email, subject: "Pomodoro Complete")
   end
 end
