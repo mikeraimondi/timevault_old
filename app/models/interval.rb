@@ -22,7 +22,6 @@ class Interval < ActiveRecord::Base
         self.end = DateTime.now
         if self.save
           pomodoro.send_pomodoro_notification_email!
-          binding.pry
         end
       end
     end
