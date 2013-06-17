@@ -37,6 +37,10 @@ class Pomodoro < ActiveRecord::Base
     time_left
   end
 
+  def percent_complete
+    duration_remaining / duration * 100
+  end
+
   def pause_unpause!
     if running?
       if open_interval

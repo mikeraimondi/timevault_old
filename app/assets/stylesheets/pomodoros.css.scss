@@ -2,6 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+form.new_pomodoro {
+  display: inline;
+}
+
 form.edit_pomodoro {
   display: inline;
+}
+
+ul {
+  list-style-type: none;
+  li.pomodoro-entry {
+    background-color: #d9edf7;
+  }
 }

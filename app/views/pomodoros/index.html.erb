@@ -1,23 +1,39 @@
 <div class="nav_active" id="all_pomodoros">
-  <%= simple_form_for(@pomodoro) do |f| %>
-    <%= f.hidden_field :duration, value: 1500 %>
-    <%= f.submit "Start Pomodoro", class: "btn btn-primary" %>
-  <% end %>
-  <%= simple_form_for(@pomodoro) do |f| %>
-    <%= f.hidden_field :duration, value: 300 %>
-    <%= f.submit "Start Break", class: "btn btn-success" %>
-  <% end %>
-  <ul>
-    <% @pomodoros.each do |pomodoro| %>
-    <li class="well"><%= "Duration: #{pomodoro.duration}. Remaining: #{pomodoro.duration_string}" %>
-      <%- if pomodoro.running? -%>
-        <%= simple_form_for(pomodoro) do |f| %>
-        <% btnval = pomodoro.paused? ? "Resume" : "Pause" %>
-          <%= f.submit btnval, class: "btn btn-small btn-warning" %>
-        <%- end -%>
-      <%- end -%>
-      <%= link_to("Delete", pomodoro, :class => "btn btn-small btn-danger", method: :delete) %>
-    </li>
+  <div class ="well">
+    <%= simple_form_for(@pomodoro) do |f| %>
+      <%= f.hidden_field :duration, value: 1500 %>
+      <%= f.submit "Start Pomodoro", class: "btn btn-large btn-info #{'disabled' if current_user.timer_running?}" %>
     <% end %>
+    <%= simple_form_for(@pomodoro) do |f| %>
+      <%= f.hidden_field :duration, value: 300 %>
+      <%= f.submit "Start Break", class: "btn btn-large btn-success #{'disabled' if current_user.timer_running?}" %>
+    <% end %>
+    <%= simple_form_for(@pomodoro) do |f| %>
+      <%= f.hidden_field :duration, value: 900 %>
+      <%= f.submit "Start Long Break", class: "btn btn-large btn-warning #{'disabled' if current_user.timer_running?}" %>
+    <% end %>
+  </div>
+  <ul>
+    <%- @pomodoros.each do |pomodoro| -%>
+      <%- if pomodoro.duration == 1500 -%>
+        <li class="pomodoro-entry well">
+      <%- else -%>
+        <li class="well">
+      <%- end -%>  
+        <%- if pomodoro.running? -%>
+          <div class="progress progress-info progress-striped active">
+            <div class="bar" style="width: <%= pomodoro.percent_complete %>%;">
+              <span class="remaining"><%= "Remaining: #{pomodoro.duration_string}" %></span>
+            </div>
+          </div>
+          <%= simple_form_for(pomodoro) do |f| %>
+          <% btnval = pomodoro.paused? ? "Resume" : "Pause" %>
+            <%= f.submit btnval, class: "btn btn-small btn-inverse" %>
+          <%- end -%>
+        <%- end -%>
+        <span class="badge started-at"><%= "Started: #{pomodoro.intervals.first.start.strftime("%e %b %l:%M %p")}" %></span>
+        <%= link_to("Delete", pomodoro, :class => "btn btn-small btn-danger pull-right", method: :delete) %>
+      </li>
+    <%- end -%>
   </ul>
 </div>
