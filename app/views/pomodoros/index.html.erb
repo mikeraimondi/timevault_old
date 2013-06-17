@@ -2,15 +2,27 @@
   <div class ="well">
     <%= simple_form_for(@pomodoro) do |f| %>
       <%= f.hidden_field :duration, value: 1500 %>
-      <%= f.submit "Start Pomodoro", class: "btn btn-large btn-info #{'disabled' if current_user.timer_running?}" %>
+      <%- if current_user.timer_running? -%>
+        <%= f.submit "Start Pomodoro", class: "btn btn-large btn-info", disabled: "disabled" %>
+      <%- else -%>
+        <%= f.submit "Start Pomodoro", class: "btn btn-large btn-info" %>
+      <%- end -%>
     <% end %>
     <%= simple_form_for(@pomodoro) do |f| %>
       <%= f.hidden_field :duration, value: 300 %>
-      <%= f.submit "Start Break", class: "btn btn-large btn-success #{'disabled' if current_user.timer_running?}" %>
+      <%- if current_user.timer_running? -%>
+        <%= f.submit "Start Break", class: "btn btn-large btn-success", disabled: "disabled" %>
+      <%- else -%>
+        <%= f.submit "Start Break", class: "btn btn-large btn-success" %>
+      <%- end -%>
     <% end %>
     <%= simple_form_for(@pomodoro) do |f| %>
       <%= f.hidden_field :duration, value: 900 %>
-      <%= f.submit "Start Long Break", class: "btn btn-large btn-warning #{'disabled' if current_user.timer_running?}" %>
+      <%- if current_user.timer_running? -%>
+        <%= f.submit "Start Long Break", class: "btn btn-large btn-warning", disabled: "disabled" %>
+      <%- else -%>
+        <%= f.submit "Start Long Break", class: "btn btn-large btn-warning" %>
+      <%- end -%>
     <% end %>
   </div>
   <ul>
@@ -21,12 +33,14 @@
         <li class="well">
       <%- end -%>  
         <%- if pomodoro.running? -%>
-          <div class="progress progress-info progress-striped active">
+          <% animated = pomodoro.paused? ? "" : "active" %>
+          <div class="progress progress-info progress-striped <%= animated %>">
             <div class="bar" style="width: <%= pomodoro.percent_complete %>%;">
               <span class="remaining"><%= "Remaining: #{pomodoro.duration_string}" %></span>
             </div>
           </div>
           <%= simple_form_for(pomodoro) do |f| %>
+          <!-- TODO: use view object to abstract away logic here -->
           <% btnval = pomodoro.paused? ? "Resume" : "Pause" %>
             <%= f.submit btnval, class: "btn btn-small btn-inverse" %>
           <%- end -%>
