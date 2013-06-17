@@ -1,8 +1,11 @@
 <div class="nav_active" id="all_pomodoros">
   <%= simple_form_for(@pomodoro) do |f| %>
-    <%= f.error_notification %>
-    <%= f.input :duration %>
-    <%= f.button :submit, :class => "btn-primary" %>
+    <%= f.hidden_field :duration, value: 1500 %>
+    <%= f.submit "Start Pomodoro", class: "btn btn-primary" %>
+  <% end %>
+  <%= simple_form_for(@pomodoro) do |f| %>
+    <%= f.hidden_field :duration, value: 300 %>
+    <%= f.submit "Start Break", class: "btn btn-success" %>
   <% end %>
   <ul>
     <% @pomodoros.each do |pomodoro| %>
