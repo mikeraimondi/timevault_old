@@ -57,6 +57,18 @@ class Pomodoro < ActiveRecord::Base
     end
   end
 
+  def period_name
+    if period == "productive"
+      "Pomodoro"
+    elsif period == "break"
+      "Break"
+    elsif period == "long_break"
+      "Long Break"
+    else
+      ""
+    end
+  end
+
   def duration_string
     time_left = duration_remaining
     Time.at(time_left).utc.strftime("%H:%M:%S")
@@ -77,7 +89,7 @@ class Pomodoro < ActiveRecord::Base
   end 
 
   def send_pomodoro_notification_email!
-    UserMailer.pomodoro_notification(user).deliver
+    UserMailer.pomodoro_notification(user, self).deliver
   end
 
   private

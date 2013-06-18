@@ -1,9 +1,10 @@
 class UserMailer < ActionMailer::Base
   default from: "gotimevault@gmail.com"
 
-  def pomodoro_notification(user)
+  def pomodoro_notification(user, pomodoro)
     @user = user
     @url = pomodoros_url
-    mail(to: user.email, subject: "Pomodoro Complete")
+    @pomodoro = pomodoro
+    mail(to: user.email, subject: "#{@pomodoro.period_name} Complete")
   end
 end

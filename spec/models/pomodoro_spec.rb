@@ -30,4 +30,16 @@ describe Pomodoro do
     expect(Delayed::Job.all.count).to eql(1)
   end
 
+  it "should return natural words for periods" do
+    maker = PomodoroMaker.new(user, duration: 20, period: "productive")
+    pomodoro = maker.make_pomodoro
+    expect(pomodoro.period_name).to eql("Pomodoro")
+    maker = PomodoroMaker.new(user, duration: 20, period: "break")
+    pomodoro = maker.make_pomodoro
+    expect(pomodoro.period_name).to eql("Break")
+    maker = PomodoroMaker.new(user, duration: 20, period: "long_break")
+    pomodoro = maker.make_pomodoro
+    expect(pomodoro.period_name).to eql("Long Break")
+  end
+
 end

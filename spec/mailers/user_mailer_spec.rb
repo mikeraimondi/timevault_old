@@ -7,8 +7,11 @@ describe UserMailer do
     include EmailSpec::Matchers
     include Rails.application.routes.url_helpers
 
-    let(:user)   { FactoryGirl.create(:user) }
-    let(:email)  { UserMailer.pomodoro_notification(user) }
+    let(:user)      { FactoryGirl.create(:user) }
+    let(:params)    { {duration: 1, period: 'productive'} }
+    let(:maker)     { PomodoroMaker.new(user, params) }
+    let(:pomodoro)  { maker.make_pomodoro }
+    let(:email)     { UserMailer.pomodoro_notification(user, pomodoro) }
 
     it "is set to deliver to the user email" do
       expect(email).to deliver_to(user.email)
@@ -28,7 +31,7 @@ describe UserMailer do
 
     it "has instructive body text" do
       expect(email).to have_body_text("Your pomodoro is complete!")
-      expect(email).to have_body_text("Follow this link to start your break")
+      expect(email).to have_body_text("Follow this link to manage your pomodoros")
     end
   end
 
