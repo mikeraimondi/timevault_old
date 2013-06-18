@@ -34,8 +34,7 @@ feature "Starting a pomodoro timer", %Q{
     visit pomodoros_path
     click_button "Start Pomodoro"
     visit pomodoros_path
-    click_button "Start Pomodoro"
-    page.should have_content "pomodoro is already running"
+    expect(page).to_not have_button "Start Pomodoro"
   end
 
   # scenario "with an expired pomodoro" do

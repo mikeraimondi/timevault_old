@@ -25,7 +25,7 @@ describe User do
     end
 
     it "indicates that one is running" do
-      pomodoro = user.pomodoros.create(duration: 10)
+      pomodoro = user.pomodoros.create(duration: 10, period: "break")
       expect( user.timer_running? ).to eql(true)
     end
   end

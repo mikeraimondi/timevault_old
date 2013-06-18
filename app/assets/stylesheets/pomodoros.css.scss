@@ -12,7 +12,13 @@ form.edit_pomodoro {
 
 ul {
   list-style-type: none;
-  li.pomodoro-entry {
+  li.productive-entry {
     background-color: #d9edf7;
+  }
+  li.break-entry {
+    background-color: #dff0d8;
+  }
+  li.long-break-entry {
+    background-color: #fcf8e3;
   }
 }

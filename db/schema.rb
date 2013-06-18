@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130616183209) do
+ActiveRecord::Schema.define(:version => 20130618130256) do
 
   create_table "commits", :force => true do |t|
     t.string   "sha1",          :null => false
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20130616183209) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "period",     :null => false
   end
 
   create_table "repositories", :force => true do |t|

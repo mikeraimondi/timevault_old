@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe PomodoroMaker do
   let(:user)     { FactoryGirl.create(:user) }
-  let(:params)   { {duration: 1} }
+  let(:params)   { {duration: 1, period: 'productive'} }
   let(:maker)    { PomodoroMaker.new(user, params) }
   let(:pomodoro) { maker.make_pomodoro }
 

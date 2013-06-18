@@ -23,7 +23,7 @@ feature "User sees breaks", %Q{
 
   scenario "User sees productive period" do
     click_button "Start Pomodoro"
-    expect(page).to have_css(".pomodoro-entry")
+    expect(page).to have_css(".productive-entry")
   end
 
   scenario "User sees break period" do
@@ -32,7 +32,7 @@ feature "User sees breaks", %Q{
   end
 
   scenario "User sees long break period" do
-    click_button "Start Break"
+    click_button "Start Long Break"
     expect(page).to have_css(".long-break-entry")
   end
 

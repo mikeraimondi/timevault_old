@@ -1,8 +1,7 @@
 FactoryGirl.define do 
-  factory :user do
-    sequence(:email)      {|n| "email#{n}@gotimevault.com" }
-    password              "foobar123"
-    password_confirmation "foobar123"
+  factory :repository do
+    name                  "test repo"
+    url                   "http://github.com/foo/test_repo"
   end
 
   factory :short_pwd_user do
@@ -17,8 +16,9 @@ FactoryGirl.define do
     start                 DateTime.now 
   end
 
-  factory :repository do
-    name                  "test repo"
-    url                   "http://github.com/foo/test_repo"
+  factory :user do
+    sequence(:email)      {|n| "email#{n}@gotimevault.com" }
+    password              "foobar123"
+    password_confirmation "foobar123"
   end
 end

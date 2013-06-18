@@ -1,5 +1,5 @@
 class Pomodoro < ActiveRecord::Base
-  attr_accessible :duration
+  attr_accessible :duration, :period
   
   before_destroy :destroy_workers
 
@@ -9,9 +9,13 @@ class Pomodoro < ActiveRecord::Base
   has_many  :intervals, inverse_of: :pomodoro,
             dependent: :destroy
 
-  validates_presence_of :duration
+  validates_presence_of :duration, :period
 
   validates :duration, numericality: { only_integer: true, greater_than: 0 }   
+
+  POMODORO_PERIODS = %w[productive break long_break]
+
+  validates_inclusion_of :period, in: POMODORO_PERIODS
 
   def duration_remaining
     all_intervals_duration = 0

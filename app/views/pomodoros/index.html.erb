@@ -1,34 +1,15 @@
 <div class="nav_active" id="all_pomodoros">
   <div class ="well">
-    <%= simple_form_for(@pomodoro) do |f| %>
-      <%= f.hidden_field :duration, value: 1500 %>
-      <%- if current_user.timer_running? -%>
-        <%= f.submit "Start Pomodoro", class: "btn btn-large btn-info", disabled: "disabled" %>
-      <%- else -%>
-        <%= f.submit "Start Pomodoro", class: "btn btn-large btn-info" %>
-      <%- end -%>
-    <% end %>
-    <%= simple_form_for(@pomodoro) do |f| %>
-      <%= f.hidden_field :duration, value: 300 %>
-      <%- if current_user.timer_running? -%>
-        <%= f.submit "Start Break", class: "btn btn-large btn-success", disabled: "disabled" %>
-      <%- else -%>
-        <%= f.submit "Start Break", class: "btn btn-large btn-success" %>
-      <%- end -%>
-    <% end %>
-    <%= simple_form_for(@pomodoro) do |f| %>
-      <%= f.hidden_field :duration, value: 900 %>
-      <%- if current_user.timer_running? -%>
-        <%= f.submit "Start Long Break", class: "btn btn-large btn-warning", disabled: "disabled" %>
-      <%- else -%>
-        <%= f.submit "Start Long Break", class: "btn btn-large btn-warning" %>
-      <%- end -%>
-    <% end %>
+    <%= render 'pomodoro_form' %> 
   </div>
   <ul>
     <%- @pomodoros.each do |pomodoro| -%>
-      <%- if pomodoro.duration == 1500 -%>
-        <li class="pomodoro-entry well">
+      <%- if pomodoro.period == "productive" -%>
+        <li class="productive-entry well">
+      <%- elsif pomodoro.period == "break" -%>
+        <li class="break-entry well">
+      <%- elsif pomodoro.period == "long_break" -%>
+        <li class="long-break-entry well">
       <%- else -%>
         <li class="well">
       <%- end -%>  
