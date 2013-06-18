@@ -33,16 +33,14 @@
         <li class="well">
       <%- end -%>  
         <%- if pomodoro.running? -%>
-          <% animated = pomodoro.paused? ? "" : "active" %>
-          <div class="progress progress-info progress-striped <%= animated %>">
+          <%- indicators = PomodoroIndicator.new(pomodoro) -%>
+          <div class="progress progress-info progress-striped <%= indicators.animated %>">
             <div class="bar" style="width: <%= pomodoro.percent_complete %>%;">
-              <span class="remaining"><%= "Remaining: #{pomodoro.duration_string}" %></span>
+              <span class="remaining"><%= pomodoro.duration_string %></span>
             </div>
           </div>
           <%= simple_form_for(pomodoro) do |f| %>
-          <!-- TODO: use view object to abstract away logic here -->
-          <% btnval = pomodoro.paused? ? "Resume" : "Pause" %>
-            <%= f.submit btnval, class: "btn btn-small btn-inverse" %>
+            <%= f.submit indicators.button_label, class: "btn btn-small btn-inverse" %>
           <%- end -%>
         <%- end -%>
         <span class="badge started-at"><%= "Started: #{pomodoro.intervals.first.start.strftime("%e %b %l:%M %p")}" %></span>
