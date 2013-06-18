@@ -4,18 +4,10 @@
   </div>
   <ul>
     <%- @pomodoros.each do |pomodoro| -%>
-      <%- if pomodoro.period == "productive" -%>
-        <li class="productive-entry well">
-      <%- elsif pomodoro.period == "break" -%>
-        <li class="break-entry well">
-      <%- elsif pomodoro.period == "long_break" -%>
-        <li class="long-break-entry well">
-      <%- else -%>
-        <li class="well">
-      <%- end -%>  
+      <%- indicators = PomodoroIndicator.new(pomodoro) -%>
+      <li class="<%= indicators.well_class %> well">
         <%- if pomodoro.running? -%>
-          <%- indicators = PomodoroIndicator.new(pomodoro) -%>
-          <div class="progress progress-info progress-striped <%= indicators.animated %>">
+          <div class="progress <%= indicators.bar_class %> progress-striped <%= indicators.animated %>">
             <div class="bar" style="width: <%= pomodoro.percent_complete %>%;">
               <span class="remaining"><%= pomodoro.duration_string %></span>
             </div>
