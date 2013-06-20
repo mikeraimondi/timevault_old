@@ -27,7 +27,7 @@ class RepositoriesController < ApplicationController
     @repository_to_be_destroyed.destroy
 
     respond_to do |format|
-      format.html { redirect_to repositories_path }
+      format.html { redirect_to repositories_path, notice: 'Repository was successfully deleted.' }
     end
   end
 
