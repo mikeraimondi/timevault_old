@@ -20,5 +20,6 @@ FactoryGirl.define do
     sequence(:email)      {|n| "email#{n}@gotimevault.com" }
     password              "foobar123"
     password_confirmation "foobar123"
+    confirmed_at          DateTime.now
   end
 end

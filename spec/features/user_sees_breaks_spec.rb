@@ -11,8 +11,6 @@ feature "User sees breaks", %Q{
 
   background do
     Warden.test_mode!
-    user.confirmed_at = Time.now
-    user.save
     login_as(user, scope: :user)
     visit pomodoros_path
   end

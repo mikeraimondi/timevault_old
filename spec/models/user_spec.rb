@@ -12,11 +12,6 @@ describe User do
 
   it { should have_many(:commits) }
 
-  let(:user) { FactoryGirl.create(:user) }
-  it "has email foo@bar.com" do
-    user.email.should =~ /@gotimevault.com$/
-  end
-
   describe "indicates whether a pomodoro is currently running" do
     let(:user) { FactoryGirl.create(:user) }
 

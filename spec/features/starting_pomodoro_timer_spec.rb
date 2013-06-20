@@ -15,8 +15,6 @@ feature "Starting a pomodoro timer", %Q{
 
   background do
     Warden.test_mode!
-    user.confirmed_at = Time.now
-    user.save
     login_as(user, scope: :user)
   end
 

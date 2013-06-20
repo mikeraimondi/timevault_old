@@ -3,8 +3,6 @@ require 'spec_helper'
 feature 'Signing in' do
   background do |user|
     @user = FactoryGirl.create(:user)
-    @user.confirmed_at = Time.now
-    @user.save
   end
 
   scenario  'Signing in with valid credentials' do
