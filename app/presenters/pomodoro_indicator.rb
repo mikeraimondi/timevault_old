@@ -4,6 +4,7 @@ class PomodoroIndicator
     @pomodoro = pomodoro
   end
 
+  #TODO Use Draper
   def bar_class
     if @pomodoro.period == "productive"
       "progress-info"

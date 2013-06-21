@@ -1,8 +1,6 @@
 class Pomodoro < ActiveRecord::Base
   attr_accessible :duration, :period
   
-  before_destroy :destroy_workers
-
   belongs_to :user, inverse_of: :pomodoros
   validates_presence_of :user
 
@@ -20,6 +18,7 @@ class Pomodoro < ActiveRecord::Base
   def duration_remaining
     all_intervals_duration = 0
 
+    #TODO find_each
     self.intervals.each do |interval|
       unless interval.new_record?
         diff = 0
@@ -84,10 +83,6 @@ class Pomodoro < ActiveRecord::Base
     running? && !(open_interval)
   end
 
-  def destroy_workers
-    intervals.each { |interval| interval.destroy_worker! }
-  end 
-
   def send_pomodoro_notification_email!
     UserMailer.pomodoro_notification(user, self).deliver
   end
@@ -95,8 +90,10 @@ class Pomodoro < ActiveRecord::Base
   private
 
   def open_interval
-    intervals.each { |interval| return interval unless interval.end.present? }
+    intervals.find_each { |interval| return interval unless interval.end.present? }
 
+    # TODO: use scope, like:
+    # intervals.open.first
     false
   end
 

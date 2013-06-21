@@ -16,7 +16,7 @@ class Interval < ActiveRecord::Base
     save
   end
 
-  def clean_up!
+  def complete!
     if pomodoro.duration_remaining == 0
       unless self.end.present?
         self.end = DateTime.now
@@ -24,13 +24,6 @@ class Interval < ActiveRecord::Base
           pomodoro.send_pomodoro_notification_email!
         end
       end
-    end
-    destroy_worker!
-  end
-
-  def destroy_worker!
-    if job = Delayed::Job.where(id: worker_id).first
-      job.destroy
     end
   end
 
