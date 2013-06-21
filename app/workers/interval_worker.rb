@@ -4,7 +4,7 @@ class IntervalWorker
   end
 
   def perform
-    interval = Interval.find(@interval_id)
+    interval = Interval.where(id: @interval_id).first
     interval.clean_up!
   end
 end

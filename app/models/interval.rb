@@ -29,9 +29,8 @@ class Interval < ActiveRecord::Base
   end
 
   def destroy_worker!
-    begin
-      Delayed::Job.find(worker_id).destroy
-    rescue ActiveRecord::RecordNotFound
+    if job = Delayed::Job.where(id: worker_id).first
+      job.destroy
     end
   end
 
