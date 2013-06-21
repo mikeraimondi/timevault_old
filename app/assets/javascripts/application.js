@@ -14,4 +14,11 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require cocoon
+//= require handlebars
+//= require ember
+//= require ember-data
+//= require_self
+//= require timevault
+Timevault = Ember.Application.create();
+
 //= require_tree .

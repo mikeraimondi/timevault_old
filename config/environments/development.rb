@@ -41,4 +41,6 @@ Timevault::Application.configure do
 
   # Don't buffer output so foreman will log to screen properly
   $stdout.sync = true
+
+  config.ember.variant = :development
 end

@@ -19,10 +19,14 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'unicorn'
 gem "hirefire-resource"
+gem 'ember-rails'
+gem 'ember-source', '1.0.0.rc5'
+gem 'handlebars-source', '1.0.0.rc4'
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'pry'
+  gem 'poltergeist'
 end
 
 group :test do
