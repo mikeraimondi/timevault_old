@@ -1,6 +1,5 @@
 class Interval < ActiveRecord::Base
-  #TODO remove worker_id
-  attr_accessible :start, :end, :worker_id
+  attr_accessible :start, :end
 
   belongs_to  :pomodoro,
               inverse_of: :intervals
@@ -15,7 +14,6 @@ class Interval < ActiveRecord::Base
 
   def create_interval_worker
     job = Delayed::Job.enqueue(IntervalWorker.new(id), run_at: when_to_run)
-    self.worker_id = job.id 
     save
   end
 

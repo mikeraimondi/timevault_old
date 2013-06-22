@@ -54,17 +54,17 @@ class Pomodoro < ActiveRecord::Base
     end
   end
 
+  def period_name_map
+    { 
+      "productive" => "Pomodoro",
+      "break" => "Break",
+      "long_break" => "Long Break"
+    }
+  end
+
   def period_name
-    #TODO hash map
-    if period == "productive"
-      "Pomodoro"
-    elsif period == "break"
-      "Break"
-    elsif period == "long_break"
-      "Long Break"
-    else
-      ""
-    end
+    name = period_name_map[period]
+    name ||= ""
   end
 
   def duration_string
