@@ -1,10 +1,10 @@
 class PomodoroIndicator
 
+  #TODO Use Draper
   def initialize(pomodoro)
     @pomodoro = pomodoro
   end
 
-  #TODO Use Draper
   def bar_class
     if @pomodoro.period == "productive"
       "progress-info"
@@ -15,6 +15,7 @@ class PomodoroIndicator
     end
   end
 
+  #TODO use hash map
   def well_class
     if @pomodoro.period == "productive"
       "productive-entry"
@@ -31,5 +32,16 @@ class PomodoroIndicator
 
   def button_label
     @pomodoro.paused? ? "Resume" : "Pause"
+  end
+
+  def start_time
+    time = @pomodoro.intervals.first.start
+    time.localtime.strftime("%e %b %l:%M %p")
+  end
+
+  def end_time
+    time = @pomodoro.intervals.last.end
+    time ||= Time.now
+    time.localtime.strftime("%e %b %l:%M %p")
   end
 end

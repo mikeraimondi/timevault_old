@@ -16,7 +16,10 @@
             <%= f.submit indicators.button_label, class: "btn btn-small btn-inverse" %>
           <%- end -%>
         <%- end -%>
-        <span class="badge started-at"><%= "Started: #{pomodoro.intervals.first.start.strftime("%e %b %l:%M %p")}" %></span>
+        <span class="label"><%= "Started: #{indicators.start_time}" %></span>
+        <%- unless pomodoro.running? -%>
+          <span class="label label-inverse"><%= "Completed: #{indicators.end_time}" %></span>
+        <%- end -%>
         <%= link_to("Delete", pomodoro, :class => "btn btn-small btn-danger pull-right", method: :delete) %>
       </li>
     <%- end -%>

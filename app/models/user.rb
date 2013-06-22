@@ -33,8 +33,7 @@ class User < ActiveRecord::Base
             readonly: true
 
   def timer_running?
-    #TODO find_each
-    self.pomodoros.each do |pomodoro|
+    self.pomodoros.find_each do |pomodoro|
       return true if pomodoro.running? && !pomodoro.new_record?
     end
     false

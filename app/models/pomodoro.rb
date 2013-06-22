@@ -4,7 +4,8 @@ class Pomodoro < ActiveRecord::Base
   belongs_to :user, inverse_of: :pomodoros
   validates_presence_of :user
 
-  has_many  :intervals, inverse_of: :pomodoro,
+  has_many  :intervals,
+            inverse_of: :pomodoro,
             dependent: :destroy
 
   validates_presence_of :duration, :period
@@ -18,16 +19,13 @@ class Pomodoro < ActiveRecord::Base
   def duration_remaining
     all_intervals_duration = 0
 
-    #TODO find_each
-    self.intervals.each do |interval|
+    self.intervals.find_each do |interval|
       unless interval.new_record?
         diff = 0
         if interval.end.present?
           diff = (interval.end.to_datetime - interval.start.to_datetime) * 1.days
         else
-          #TODO refactor out lambda
-          dist = lambda { |past, now| (past - now) * 1.days }
-          diff = dist.call(DateTime.now, interval.start.to_datetime)
+          diff = (DateTime.now - interval.start.to_datetime) * 1.days
         end
         all_intervals_duration += diff
       end
@@ -47,9 +45,9 @@ class Pomodoro < ActiveRecord::Base
   def pause_unpause!
     if running?
       if open_interval
-        int = open_interval
-        int.end = DateTime.now
-        int.save
+        interval = open_interval
+        interval.end = DateTime.now
+        interval.save
       else
         intervals.create(start: DateTime.now)
       end
@@ -57,6 +55,7 @@ class Pomodoro < ActiveRecord::Base
   end
 
   def period_name
+    #TODO hash map
     if period == "productive"
       "Pomodoro"
     elsif period == "break"
@@ -80,7 +79,7 @@ class Pomodoro < ActiveRecord::Base
   end
 
   def paused?
-    running? && !(open_interval)
+    running? && open_interval.nil?
   end
 
   def send_pomodoro_notification_email!
@@ -90,11 +89,7 @@ class Pomodoro < ActiveRecord::Base
   private
 
   def open_interval
-    intervals.find_each { |interval| return interval unless interval.end.present? }
-
-    # TODO: use scope, like:
-    # intervals.open.first
-    false
+    intervals.unclosed.first
   end
 
 end

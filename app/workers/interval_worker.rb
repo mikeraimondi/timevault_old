@@ -5,6 +5,6 @@ class IntervalWorker
 
   def perform
     interval = Interval.where(id: @interval_id).first
-    interval.complete!
+    interval.complete! if interval.present?
   end
 end

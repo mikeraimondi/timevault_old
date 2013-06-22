@@ -1,4 +1,5 @@
 class Interval < ActiveRecord::Base
+  #TODO remove worker_id
   attr_accessible :start, :end, :worker_id
 
   belongs_to  :pomodoro,
@@ -9,6 +10,8 @@ class Interval < ActiveRecord::Base
   validates_presence_of :start
 
   after_create  :create_interval_worker
+
+  scope :unclosed, where(end: nil)
 
   def create_interval_worker
     job = Delayed::Job.enqueue(IntervalWorker.new(id), run_at: when_to_run)
