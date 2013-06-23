@@ -5,8 +5,15 @@ class Commit < ActiveRecord::Base
             through: :task_commits,
             inverse_of: :commits,
             readonly: true
+
   belongs_to  :repository,
               inverse_of: :commits
+              
+  has_one   :user,
+            through: :repository,
+            inverse_of: :commits,
+            readonly: true
+
 
   validates_presence_of :repository
 

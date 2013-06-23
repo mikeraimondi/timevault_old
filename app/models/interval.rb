@@ -1,6 +1,9 @@
 class Interval < ActiveRecord::Base
   belongs_to  :pomodoro,
               inverse_of: :intervals
+  has_one     :user,
+              through: :pomodoro,
+              inverse_of: :intervals
               
   validates_presence_of :pomodoro
   validates_presence_of :start
