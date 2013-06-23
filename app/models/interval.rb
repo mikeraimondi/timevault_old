@@ -10,10 +10,8 @@ class Interval < ActiveRecord::Base
 
   after_create  :create_interval_worker
 
-  scope :unclosed, where(end: nil)
-
   def create_interval_worker
-    job = Delayed::Job.enqueue(IntervalWorker.new(id), run_at: when_to_run)
+    Delayed::Job.enqueue(IntervalWorker.new(id), run_at: when_to_run)
     save
   end
 
@@ -32,6 +30,14 @@ class Interval < ActiveRecord::Base
 
   def when_to_run
     (self.pomodoro.duration).seconds.from_now
+  end
+
+  class << self
+
+    def unclosed
+      where(end: nil)
+    end
+    
   end
 
 end

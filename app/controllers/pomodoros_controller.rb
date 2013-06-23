@@ -40,7 +40,7 @@ class PomodorosController < InheritedResources::Base
   end
 
   def setup_pomodoros
-    @pomodoros = current_user.pomodoros.order("created_at DESC")
+    @pomodoros = current_user.pomodoros.recent_first.decorate
     @pomodoro ||= current_user.pomodoros.new
   end
 

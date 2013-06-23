@@ -1,8 +1,6 @@
 class Task < ActiveRecord::Base
   attr_accessible :description, :end, :name, :start, :commits_attributes
 
-  scope :descending_start_date, order("start DESC")
-
   belongs_to :user, inverse_of: :tasks
 
   has_many :task_commits
@@ -35,4 +33,13 @@ class Task < ActiveRecord::Base
                       before: lambda { (DateTime.now + 30.years) },
                       after_message: "date is too far in the future",
                       allow_blank: true
+
+  class << self
+
+    def descending_start_date
+      order("start DESC")
+    end
+    
+  end
+
 end

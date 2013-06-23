@@ -4,21 +4,20 @@
   </div>
   <ul>
     <%- @pomodoros.each do |pomodoro| -%>
-      <%- indicators = PomodoroIndicator.new(pomodoro) -%>
-      <li class="<%= indicators.well_class %> well">
+      <li class="<%= pomodoro.entry_style %> well">
         <%- if pomodoro.running? -%>
-          <div class="progress <%= indicators.bar_class %> progress-striped <%= indicators.animated %>">
+          <div class="progress <%= pomodoro.progress_bar_style %> progress-striped <%= pomodoro.animated %>">
             <div class="bar" style="width: <%= pomodoro.percent_complete %>%;">
               <span class="remaining"><%= pomodoro.duration_string %></span>
             </div>
           </div>
           <%= simple_form_for(pomodoro) do |f| %>
-            <%= f.submit indicators.button_label, class: "btn btn-small btn-inverse" %>
+            <%= f.submit pomodoro.pause_btn_label, class: "btn btn-small btn-inverse" %>
           <%- end -%>
         <%- end -%>
-        <span class="label"><%= "Started: #{indicators.start_time}" %></span>
+        <span class="label"><%= "Started: #{pomodoro.start_time}" %></span>
         <%- unless pomodoro.running? -%>
-          <span class="label label-inverse"><%= "Completed: #{indicators.end_time}" %></span>
+          <span class="label label-inverse"><%= "Completed: #{pomodoro.end_time}" %></span>
         <%- end -%>
         <%= link_to("Delete", pomodoro, :class => "btn btn-small btn-danger pull-right", method: :delete) %>
       </li>

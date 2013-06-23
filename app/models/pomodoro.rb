@@ -54,14 +54,6 @@ class Pomodoro < ActiveRecord::Base
     end
   end
 
-  def period_name_map
-    { 
-      "productive" => "Pomodoro",
-      "break" => "Break",
-      "long_break" => "Long Break"
-    }
-  end
-
   def period_name
     name = period_name_map[period]
     name ||= ""
@@ -86,8 +78,24 @@ class Pomodoro < ActiveRecord::Base
     UserMailer.pomodoro_notification(user, self).deliver
   end
 
+  class << self
+
+    def recent_first
+      order("created_at DESC")
+    end
+    
+  end
+
   private
 
+  def period_name_map
+    { 
+      "productive" => "Pomodoro",
+      "break" => "Break",
+      "long_break" => "Long Break"
+    }
+  end
+  
   def open_interval
     intervals.unclosed.first
   end
