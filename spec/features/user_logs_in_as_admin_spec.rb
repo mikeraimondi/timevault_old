@@ -6,8 +6,8 @@ feature "User logs in as admin", %Q{
   so I can manage the site
   } do
 
-  given(:user)      { FactoryGirl.create(:user) }
-  given(:admin)     {FactoryGirl.create(:admin) }
+  given!(:user)      { FactoryGirl.create(:user) }
+  given!(:admin)     { FactoryGirl.create(:admin) }
 
   scenario "User with valid role logs in as admin" do
     visit new_user_session_path

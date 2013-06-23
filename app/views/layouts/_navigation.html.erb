@@ -34,7 +34,7 @@
       <%= link_to('Edit account', edit_user_registration_path) %>
       </li>
       <%- if current_user.admin? -%>
-        <%= link_to('Admin', rails_admin_path) %>
+        <li><%= link_to('Admin', rails_admin_path) %></li>
       <%- end -%>
       <li id="logout">
       <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>

@@ -5,6 +5,7 @@ module Seeders
     class << self
       def seed
         User.destroy_all
+        FactoryGirl.create(:admin)
         FactoryGirl.create(:user)
       end
     end
