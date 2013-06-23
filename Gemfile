@@ -22,6 +22,7 @@ gem "hirefire-resource"
 gem 'draper'
 gem 'rails_admin'
 gem 'cancan'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'rspec-rails'
