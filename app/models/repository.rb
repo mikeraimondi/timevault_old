@@ -1,6 +1,4 @@
 class Repository < ActiveRecord::Base
-  attr_accessible :name, :url
-
   validates_presence_of :name
 
   validates :url, url: {allow_blank: true}
@@ -11,4 +9,6 @@ class Repository < ActiveRecord::Base
 
   belongs_to  :user,
               inverse_of: :repositories
+
+  attr_accessible :name, :url
 end

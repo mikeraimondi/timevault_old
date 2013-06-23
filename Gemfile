@@ -20,6 +20,8 @@ gem 'daemons'
 gem 'unicorn'
 gem "hirefire-resource"
 gem 'draper'
+gem 'rails_admin'
+gem 'cancan'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -49,4 +51,3 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'jquery-ui-rails'

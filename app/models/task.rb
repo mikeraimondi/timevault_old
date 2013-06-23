@@ -1,13 +1,11 @@
 class Task < ActiveRecord::Base
-  attr_accessible :description, :end, :name, :start, :commits_attributes
-
   belongs_to :user, inverse_of: :tasks
-
   has_many :task_commits
   has_many  :commits,
             through: :task_commits,
             dependent: :destroy,
             inverse_of: :tasks
+            
   accepts_nested_attributes_for :commits,
                                 reject_if: :all_blank,
                                 allow_destroy: true
@@ -33,6 +31,8 @@ class Task < ActiveRecord::Base
                       before: lambda { (DateTime.now + 30.years) },
                       after_message: "date is too far in the future",
                       allow_blank: true
+
+  attr_accessible :description, :end, :name, :start, :commits_attributes
 
   class << self
 

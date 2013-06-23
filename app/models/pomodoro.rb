@@ -1,20 +1,20 @@
 class Pomodoro < ActiveRecord::Base
-  attr_accessible :duration, :period
-  
   belongs_to :user, inverse_of: :pomodoros
-  validates_presence_of :user
 
   has_many  :intervals,
             inverse_of: :pomodoro,
             dependent: :destroy
 
+  validates_presence_of :user
   validates_presence_of :duration, :period
 
-  validates :duration, numericality: { only_integer: true, greater_than: 0 }   
+  validates :duration, numericality: { only_integer: true, greater_than: 0 }
 
   POMODORO_PERIODS = %w[productive break long_break]
 
   validates_inclusion_of :period, in: POMODORO_PERIODS
+
+  attr_accessible :duration, :period
 
   def duration_remaining
     all_intervals_duration = 0

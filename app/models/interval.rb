@@ -1,14 +1,13 @@
 class Interval < ActiveRecord::Base
-  attr_accessible :start, :end
-
   belongs_to  :pomodoro,
               inverse_of: :intervals
               
   validates_presence_of :pomodoro
-
   validates_presence_of :start
 
   after_create  :create_interval_worker
+
+  attr_accessible :start, :end
 
   def create_interval_worker
     Delayed::Job.enqueue(IntervalWorker.new(id), run_at: when_to_run)
