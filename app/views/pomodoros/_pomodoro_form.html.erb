@@ -2,26 +2,26 @@
   <%= f.hidden_field :duration, value: 1500 %>
   <%= f.hidden_field :period, value: "productive" %>
   <%- if current_user.timer_running? -%>
-    <%= f.submit "Start Pomodoro", class: "btn btn-large btn-info", disabled: "disabled" %>
+    <%= f.submit "Start Pomodoro", class: "btn btn-large btn-info pom-start", disabled: "disabled" %>
   <%- else -%>
-    <%= f.submit "Start Pomodoro", class: "btn btn-large btn-info" %>
+    <%= f.submit "Start Pomodoro", class: "btn btn-large btn-info pom-start" %>
   <%- end -%>
 <% end %>
 <%= simple_form_for(@pomodoro) do |f| %>
   <%= f.hidden_field :duration, value: 300 %>
   <%= f.hidden_field :period, value: "break" %>
   <%- if current_user.timer_running? -%>
-    <%= f.submit "Start Break", class: "btn btn-large btn-success", disabled: "disabled" %>
+    <%= f.submit "Start Break", class: "btn btn-large btn-success pom-start", disabled: "disabled" %>
   <%- else -%>
-    <%= f.submit "Start Break", class: "btn btn-large btn-success" %>
+    <%= f.submit "Start Break", class: "btn btn-large btn-success pom-start" %>
   <%- end -%>
 <% end %>
 <%= simple_form_for(@pomodoro) do |f| %>
   <%= f.hidden_field :duration, value: 900 %>
   <%= f.hidden_field :period, value: "long_break" %>
   <%- if current_user.timer_running? -%>
-    <%= f.submit "Start Long Break", class: "btn btn-large btn-warning", disabled: "disabled" %>
+    <%= f.submit "Start Long Break", class: "btn btn-large btn-warning pom-start", disabled: "disabled" %>
   <%- else -%>
-    <%= f.submit "Start Long Break", class: "btn btn-large btn-warning" %>
+    <%= f.submit "Start Long Break", class: "btn btn-large btn-warning pom-start" %>
   <%- end -%>
 <% end %>

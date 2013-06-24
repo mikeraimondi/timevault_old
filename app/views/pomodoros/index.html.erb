@@ -3,8 +3,13 @@
     <%= render 'pomodoro_form' %> 
   </div>
   <%= paginate @pomodoros %>
+  <%- date = Time.new -%>
   <ul>
     <%- @pomodoros.each do |pomodoro| -%>
+      <%- if (date - pomodoro.created_at) / 1.hour > 8 %>
+        <hr>
+      <%- end -%>
+      <%- date = pomodoro.created_at -%>
       <li class="<%= pomodoro.entry_style %> well">
         <%- if pomodoro.running? -%>
           <div class="progress <%= pomodoro.progress_bar_style %> progress-striped <%= pomodoro.animated %>">

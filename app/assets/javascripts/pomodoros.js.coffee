@@ -21,6 +21,8 @@ $ ->
       if seconds.toString().length == 1
         seconds = "0#{seconds}"
       $(".remaining").text("#{hours}:#{minutes}:#{seconds}")
+    else
+      $(".pom-start").removeAttr("disabled")
 
   setBarWidth = (percentWidth) ->
     $(".bar").width("#{percentWidth}%")
