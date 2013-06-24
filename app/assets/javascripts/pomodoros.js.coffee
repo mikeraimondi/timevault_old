@@ -31,7 +31,7 @@ $ ->
     splitTime = time.split(":")
     timeSeconds = (splitTime[0] * 60 * 60) + (splitTime[1] * 60) + parseInt(splitTime[2])
     $.getJSON '/pomodoros', (pomodoros) ->
-      activePomodoro = (pomodoros[pomodoros.length - 1])
+      activePomodoro = pomodoros[0].pomodoro
       window.durationRemaining = timeSeconds
       window.totalDuration = activePomodoro.duration
       setInterval(updateBar, 1000)
