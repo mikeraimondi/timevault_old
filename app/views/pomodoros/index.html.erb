@@ -2,6 +2,7 @@
   <div class ="well">
     <%= render 'pomodoro_form' %> 
   </div>
+  <%= paginate @pomodoros %>
   <ul>
     <%- @pomodoros.each do |pomodoro| -%>
       <li class="<%= pomodoro.entry_style %> well">

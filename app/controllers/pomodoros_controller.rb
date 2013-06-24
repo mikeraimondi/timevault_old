@@ -4,8 +4,9 @@ class PomodorosController < InheritedResources::Base
   actions :index, :create, :update, :destroy
 
   def index
-    index! do
+    index! do |format|
       setup_pomodoros
+      format.json { render json: @pomodoros }
     end
   end
 
@@ -40,7 +41,9 @@ class PomodorosController < InheritedResources::Base
   end
 
   def setup_pomodoros
-    @pomodoros = current_user.pomodoros.recent_first.decorate
+    page_num = params[:page].to_i
+    @pomodoros = current_user.pomodoros.recent_first.page(page_num).per(10)
+    @pomodoros = PaginatingDecorator.new(@pomodoros)
     @pomodoro ||= current_user.pomodoros.new
   end
 
