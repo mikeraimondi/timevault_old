@@ -12,7 +12,7 @@
             </div>
           </div>
           <%= simple_form_for(pomodoro) do |f| %>
-            <%= f.submit pomodoro.pause_btn_label, class: "btn btn-small btn-inverse" %>
+            <%= f.submit pomodoro.pause_btn_label, class: "btn btn-small btn-inverse pause-btn" %>
           <%- end -%>
         <%- end -%>
         <span class="label"><%= "Started: #{pomodoro.start_time}" %></span>
