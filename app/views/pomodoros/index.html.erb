@@ -13,8 +13,8 @@
       <li class="<%= pomodoro.entry_style %> well">
         <%- if pomodoro.running? -%>
           <div class="progress <%= pomodoro.progress_bar_style %> progress-striped <%= pomodoro.animated %>">
-            <div class="bar" style="width: <%= pomodoro.percent_complete %>%;">
-              <span class="remaining"><%= pomodoro.duration_string %></span>
+            <div class="bar" id="pomodoro-bar" style="width: <%= pomodoro.percent_complete %>%;">
+              <span class="remaining" id="active-remaining"><%= pomodoro.duration_string %></span>
             </div>
           </div>
           <%= simple_form_for(pomodoro) do |f| %>
