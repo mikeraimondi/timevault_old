@@ -23,6 +23,9 @@ $ ->
       $(".remaining").text("#{hours}:#{minutes}:#{seconds}")
     else
       $(".pom-start").removeAttr("disabled")
+      $(".progress").fadeOut()
+      $(".pause-btn").fadeOut()
+      clearInterval(window.interval)
 
   setBarWidth = (percentWidth) ->
     $(".bar").width("#{percentWidth}%")
@@ -36,4 +39,4 @@ $ ->
       activePomodoro = pomodoros[0].pomodoro
       window.durationRemaining = timeSeconds
       window.totalDuration = activePomodoro.duration
-      setInterval(updateBar, 1000)
+      window.interval = setInterval(updateBar, 1000)
