@@ -37,7 +37,7 @@ $ ->
       time = integerTimeToHMS(window.durationRemaining)
       $("#active-remaining").text("#{time.hours}:#{time.minutes}:#{time.seconds}")
     else
-      resetActivePomodoro
+      resetActivePomodoro()
       clearInterval(window.interval)
 
   val = $(".pause-btn").val()
